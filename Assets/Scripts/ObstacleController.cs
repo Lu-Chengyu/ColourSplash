@@ -6,7 +6,6 @@ public class ObstacleController : MonoBehaviour
     private Color obstacleColor;
     private PlayerColorChange playerColorChange;
 
-
     void Start()
     {
         boxCollider = GetComponent<BoxCollider2D>();
