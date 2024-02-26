@@ -30,10 +30,11 @@ public class PlayerColorChange : MonoBehaviour
 
     void TryChangeColor(Color color)
     {
-        if (gameManager.IsColorAvailable(color) && color != spriteRenderer.color)
+        // if (gameManager.IsColorAvailable(color) && color != spriteRenderer.color)
+        if (color != spriteRenderer.color)
         {
             ChangeColor(color);
-            gameManager.UpdateCounter(GetColorName(), -1); // Decrease counter
+            // gameManager.UpdateCounter(GetColorName(), -1); // Decrease counter
         }
     }
 
