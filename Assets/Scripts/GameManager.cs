@@ -5,9 +5,9 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
-    public Text redCounterText;
-    public Text greenCounterText;
-    public Text blueCounterText;
+    // public Text redCounterText;
+    // public Text greenCounterText;
+    // public Text blueCounterText;
     public int currentLevel;
     public int maxLevel;
 
