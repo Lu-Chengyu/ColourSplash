@@ -93,7 +93,7 @@ public class PlayerMovement : MonoBehaviour
     {
         // accelerate / decelerate
         inputAxis = Input.GetAxis("Horizontal");
-        if (playerColorChange.GetColorName() == "Green" && Input.GetKeyDown(KeyCode.F))
+        if (playerColorChange.GetColorName() == "Green" && Input.GetKeyDown(KeyCode.U))
         {
             moveSpeed = 2.0f * moveSpeed;
             velocity.x = Mathf.MoveTowards(velocity.x, inputAxis * moveSpeed, moveSpeed * Time.deltaTime);
@@ -120,7 +120,7 @@ public class PlayerMovement : MonoBehaviour
         // perform jump
         if (Input.GetButtonDown("Jump"))
         {
-            if (playerColorChange.GetColorName() == "Red" && Input.GetKey(KeyCode.F))
+            if (playerColorChange.GetColorName() == "Red" && Input.GetKey(KeyCode.U))
             {
                 jumpBuff = 1.2f;
             }
@@ -131,7 +131,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void ShootBullet()
     {
-        if (playerColorChange.GetColorName() == "Blue" && Input.GetKeyDown(KeyCode.F))
+        if (playerColorChange.GetColorName() == "Blue" && Input.GetKeyDown(KeyCode.U))
         {
             GameObject bullet = Instantiate(bulletObject, rigidbody.position, Quaternion.identity);
             BulletController bc = bullet.GetComponent<BulletController>();

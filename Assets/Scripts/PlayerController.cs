@@ -39,15 +39,15 @@ public class PlayerController : MonoBehaviour
 
         if (canChangeColor)
         {
-            if (Input.GetKeyDown(KeyCode.R))
+            if (Input.GetKeyDown(KeyCode.J))
             {
                 ChangeColor(Color.red);
             }
-            else if (Input.GetKeyDown(KeyCode.G))
+            else if (Input.GetKeyDown(KeyCode.K))
             {
                 ChangeColor(Color.green);
             }
-            else if (Input.GetKeyDown(KeyCode.B))
+            else if (Input.GetKeyDown(KeyCode.L))
             {
                 ChangeColor(Color.blue);
             }
