@@ -1,3 +1,4 @@
+using Unity.Play.Publisher.Editor;
 using UnityEngine;
 
 public class PlayerColorChange : MonoBehaviour
@@ -9,6 +10,7 @@ public class PlayerColorChange : MonoBehaviour
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         gameManager = GameManager.Instance;
+        randomInitColor();
     }
 
     void Update()
@@ -28,6 +30,22 @@ public class PlayerColorChange : MonoBehaviour
         }
     }
 
+    void randomInitColor()
+    {
+        int random = Random.Range(0, 3);
+        if (random == 0)
+        {
+            ChangeColor(Color.red);
+            
+        }else if (random == 1)
+        {
+            ChangeColor(Color.green);
+        }
+        else
+        {
+            ChangeColor(Color.blue);
+        }
+    }
     void TryChangeColor(Color color)
     {
         // if (gameManager.IsColorAvailable(color) && color != spriteRenderer.color)
