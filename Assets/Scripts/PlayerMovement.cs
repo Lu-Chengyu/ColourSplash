@@ -93,16 +93,14 @@ public class PlayerMovement : MonoBehaviour
     {
         // accelerate / decelerate
         inputAxis = Input.GetAxis("Horizontal");
+        float speedBuff = 1.0f;
         if (playerColorChange.GetColorName() == "Green" && Input.GetKeyDown(KeyCode.U))
         {
-            moveSpeed = 2.0f * moveSpeed;
-            velocity.x = Mathf.MoveTowards(velocity.x, inputAxis * moveSpeed, moveSpeed * Time.deltaTime);
-        } 
-        else
-        {
-            velocity.x = Mathf.MoveTowards(velocity.x, inputAxis * moveSpeed, moveSpeed * Time.deltaTime);
+
+            speedBuff = 5.0f;
         }
-        
+        velocity.x = Mathf.MoveTowards(velocity.x * speedBuff, inputAxis * moveSpeed, moveSpeed * Time.deltaTime);
+
 
         // check if running into a wall
         if (rigidbody.Raycast(Vector2.right * velocity.x))
