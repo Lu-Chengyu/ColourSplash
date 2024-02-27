@@ -14,15 +14,15 @@ public class PlayerColorChange : MonoBehaviour
     void Update()
     {
         // Check for keyboard inputs
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.J))
         {
             TryChangeColor(Color.red);
         }
-        else if (Input.GetKeyDown(KeyCode.G))
+        else if (Input.GetKeyDown(KeyCode.K))
         {
             TryChangeColor(Color.green);
         }
-        else if (Input.GetKeyDown(KeyCode.B))
+        else if (Input.GetKeyDown(KeyCode.L))
         {
             TryChangeColor(Color.blue);
         }
@@ -30,10 +30,11 @@ public class PlayerColorChange : MonoBehaviour
 
     void TryChangeColor(Color color)
     {
-        if (gameManager.IsColorAvailable(color) && color != spriteRenderer.color)
+        // if (gameManager.IsColorAvailable(color) && color != spriteRenderer.color)
+        if (color != spriteRenderer.color)
         {
             ChangeColor(color);
-            gameManager.UpdateCounter(GetColorName(), -1); // Decrease counter
+            // gameManager.UpdateCounter(GetColorName(), -1); // Decrease counter
         }
     }
 
