@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -99,7 +100,8 @@ public class GameManager : MonoBehaviour
     public void LevelClear()
     {
         Application.Quit();
-        int currentLevel = PlayerPrefs.GetInt("maxLevel", 1);
+        int currentLevel = PlayerPrefs.GetInt("currentLevel", 1);
+        Debug.Log("Current level: " + currentLevel);
         if (currentLevel == maxLevel)
         {
             Debug.Log("Reached maxlevel");
