@@ -80,12 +80,12 @@ public class PlayerMovement : MonoBehaviour
         // move mario based on his velocity
         Vector2 position = rigidbody.position;
         position += velocity * Time.fixedDeltaTime;
-
+    
         // clamp within the screen bounds
         Vector2 leftEdge = camera.ScreenToWorldPoint(Vector2.zero);
         Vector2 rightEdge = camera.ScreenToWorldPoint(new Vector2(Screen.width, Screen.height));
         position.x = Mathf.Clamp(position.x, leftEdge.x + 0.5f, rightEdge.x - 0.5f);
-
+    
         rigidbody.MovePosition(position);
     }
 
@@ -96,7 +96,6 @@ public class PlayerMovement : MonoBehaviour
         float speedBuff = 1.0f;
         if (playerColorChange.GetColorName() == "Green" && Input.GetKeyDown(KeyCode.U))
         {
-
             speedBuff = 5.0f;
         }
         velocity.x = Mathf.MoveTowards(velocity.x * speedBuff, inputAxis * moveSpeed, moveSpeed * Time.deltaTime);
@@ -107,6 +106,9 @@ public class PlayerMovement : MonoBehaviour
         {
             velocity.x = 0f;
         }
+        
+        Vector2 position = rigidbody.position;
+        position += velocity * Time.fixedDeltaTime;
     }
 
     private void GroundedMovement()
@@ -118,7 +120,7 @@ public class PlayerMovement : MonoBehaviour
         // perform jump
         if (Input.GetButtonDown("Jump"))
         {
-            if (playerColorChange.GetColorName() == "Red" && Input.GetKey(KeyCode.U))
+            if (playerColorChange.GetColorName() == "Red" && Input.GetKeyDown(KeyCode.U))
             {
                 jumpBuff = 1.2f;
             }
@@ -132,7 +134,7 @@ public class PlayerMovement : MonoBehaviour
         if (playerColorChange.GetColorName() == "Blue" && Input.GetKeyDown(KeyCode.U))
         {
             GameObject bullet = Instantiate(bulletObject, rigidbody.position, Quaternion.identity);
-            BulletController bc = bullet.GetComponent<BulletController>();
+            bullet.AddComponent<BulletController>();
         }
     }
 
