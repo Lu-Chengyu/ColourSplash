@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -91,15 +92,16 @@ public class GameManager : MonoBehaviour
 
     public void DestroyGameInstance()
     {
-        Application.Quit();
+        // Application.Quit();
         FindObjectOfType<EndGame>().End(false);
     }
 
     //Call this method when player reaches the end of the level
     public void LevelClear()
     {
-        Application.Quit();
-        int currentLevel = PlayerPrefs.GetInt("maxLevel", 1);
+        // Application.Quit();
+        int currentLevel = PlayerPrefs.GetInt("currentLevel", 1);
+        Debug.Log("Current level: " + currentLevel);
         if (currentLevel == maxLevel)
         {
             Debug.Log("Reached maxlevel");
