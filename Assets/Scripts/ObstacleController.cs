@@ -19,7 +19,7 @@ public class ObstacleController : MonoBehaviour
         if (playerColorChange.GetColor() == obstacleColor)
         {
             // Matched colors, set collider size to the minimum
-            boxCollider.size = new Vector2(0.0001f, 0.0001f); ;
+            boxCollider.size = new Vector2(0.0001f, 0.0001f);
         }
         else
         {

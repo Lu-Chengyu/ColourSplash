@@ -602,17 +602,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   color: {r: 0, g: 0.7921569, b: 1, a: 0}
---- !u!114 &20642756 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8248692003429259037, guid: c30de91e61d74bc408de2ce1a9c81317, type: 3}
-  m_PrefabInstance: {fileID: 311164193794182747}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &30950871
 GameObject:
   m_ObjectHideFlags: 0
@@ -9659,17 +9648,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1223794941 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4328733812533104425, guid: c30de91e61d74bc408de2ce1a9c81317, type: 3}
-  m_PrefabInstance: {fileID: 311164193794182747}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1229919428
 GameObject:
   m_ObjectHideFlags: 0
@@ -13707,17 +13685,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 519420032}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1645979662 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3319017069325810145, guid: c30de91e61d74bc408de2ce1a9c81317, type: 3}
-  m_PrefabInstance: {fileID: 311164193794182747}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1662839961
 GameObject:
   m_ObjectHideFlags: 0
@@ -14983,6 +14950,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48763ddbfecbbd6409545c34573730ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bulletObject: {fileID: 0}
+  bullectSpeed: 5
   moveSpeed: 5
   maxJumpHeight: 5
   maxJumpTime: 1
@@ -16218,9 +16187,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df8ad361af435794980a74b6632df1fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  redCounterText: {fileID: 20642756}
-  greenCounterText: {fileID: 1645979662}
-  blueCounterText: {fileID: 1223794941}
+  currentLevel: 0
+  maxLevel: 0
 --- !u!4 &1964257471
 Transform:
   m_ObjectHideFlags: 0
@@ -18563,7 +18531,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
