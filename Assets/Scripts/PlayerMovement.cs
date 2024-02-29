@@ -96,9 +96,10 @@ public class PlayerMovement : MonoBehaviour
         float speedBuff = 1.0f;
         if (playerColorChange.GetColorName() == "Green" && Input.GetKeyDown(KeyCode.U))
         {
-            speedBuff = 5.0f;
+            speedBuff = 6.0f;
         }
-        velocity.x = Mathf.MoveTowards(velocity.x * speedBuff, inputAxis * moveSpeed, moveSpeed * Time.deltaTime);
+        // velocity.x = Mathf.MoveTowards(velocity.x * speedBuff, inputAxis * moveSpeed, moveSpeed * Time.deltaTime);
+        velocity.x = Mathf.MoveTowards(velocity.x * speedBuff, inputAxis * moveSpeed * speedBuff, 1f);
 
 
         // check if running into a wall

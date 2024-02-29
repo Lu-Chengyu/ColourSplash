@@ -19,7 +19,11 @@
             {
                 "type": "System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
                 "key": "buildOutputDirList",
+<<<<<<< HEAD
+                "value": "{\"m_Value\":\"G:/Unity Projects/ColourSplash/build;C:/Users/luche/Desktop/gl;C:/Users/luche/Desktop/webgl;;;;;;;\"}"
+=======
                 "value": "{\"m_Value\":\"C:/Users/luche/Documents/GitHub/ColourSplash/WebGL Builds;C:/Users/luche/Desktop/gl;C:/Users/luche/Desktop/webgl;;;;;;;\"}"
+>>>>>>> 294db96f0d820f0e3e2ea71756cd1da97a367cff
             }
         ]
     }
