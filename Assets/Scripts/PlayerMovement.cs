@@ -12,7 +12,8 @@ public class PlayerMovement : MonoBehaviour
     private float inputAxis;
 
     public GameObject bulletObject;
-    public float bullectSpeed = 5f;
+    // public float bullectSpeed = 5f;
+    public Vector2 moveDirection = Vector2.right;  // movement direction
     public float moveSpeed = 5f;
     public float maxJumpHeight = 5f;
     public float maxJumpTime = 1f;
@@ -93,6 +94,14 @@ public class PlayerMovement : MonoBehaviour
     {
         // accelerate / decelerate
         inputAxis = Input.GetAxis("Horizontal");
+        if (inputAxis > 0)
+        {
+            moveDirection = Vector2.right;
+        }
+        else if (inputAxis < 0)
+        {
+            moveDirection = Vector2.left;
+        }
         float speedBuff = 1.0f;
         if (playerColorChange.GetColorName() == "Green" && Input.GetKeyDown(KeyCode.U))
         {
@@ -137,7 +146,13 @@ public class PlayerMovement : MonoBehaviour
         if (playerColorChange.GetColorName() == "Blue" && Input.GetKeyDown(KeyCode.U))
         {
             GameObject bullet = Instantiate(bulletObject, rigidbody.position, Quaternion.identity);
-            bullet.AddComponent<BulletController>();
+            BulletController bc = bullet.GetComponent<BulletController>();
+            // bullet.AddComponent<BulletController>();
+            if (bc != null)
+            {
+                bc.moveDirection = moveDirection;
+                bc.DestroyBullet();
+            }
         }
     }
 
