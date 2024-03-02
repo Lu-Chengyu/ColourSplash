@@ -9,16 +9,16 @@ public class BulletController : MonoBehaviour
     Rigidbody2D rb;
     public Vector2 moveDirection = Vector2.right;
 
-    private void Start()
+    private void Awake()
     {
-        rb = GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody2D>(); 
     }
+
 
     // Update is called once per frame
     void Update()
     {
         transform.Translate(moveDirection * Time.deltaTime * 5);
-        
     }
 
 
@@ -28,11 +28,16 @@ public class BulletController : MonoBehaviour
         ObstacleController obstacle = other.gameObject.GetComponent<ObstacleController>();
         if (breakableObstacle != null)
         {
-            breakableObstacle.Break();
+            breakableObstacle.Break();  // break the wall
         }
         if (obstacle != null)
         {
             Destroy(this.gameObject);
         }
+    }
+
+    public void DestroyBullet()
+    {
+        Destroy(this.gameObject, 2f); // bullets disappear after 3 seconds
     }
 }

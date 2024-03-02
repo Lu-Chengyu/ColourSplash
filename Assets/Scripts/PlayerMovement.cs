@@ -151,6 +151,7 @@ public class PlayerMovement : MonoBehaviour
             if (bc != null)
             {
                 bc.moveDirection = moveDirection;
+                bc.DestroyBullet();
             }
         }
     }
