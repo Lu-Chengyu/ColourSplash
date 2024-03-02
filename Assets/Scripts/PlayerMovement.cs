@@ -117,14 +117,16 @@ public class PlayerMovement : MonoBehaviour
         // prevent gravity from infinitly building up
         velocity.y = Mathf.Max(velocity.y, 0f);
         jumping = velocity.y > 0f;
-        float jumpBuff = 1f;
         // perform jump
         if (Input.GetButtonDown("Jump"))
         {
-            if (playerColorChange.GetColorName() == "Red" && Input.GetKeyDown(KeyCode.U))
-            {
-                jumpBuff = 1.2f;
-            }
+            
+            velocity.y = jumpForce;
+            jumping = true;
+        }
+        if (playerColorChange.GetColorName() == "Red" && Input.GetKeyDown(KeyCode.U))
+        {
+            float jumpBuff = 2.0f;
             velocity.y = jumpForce * jumpBuff;
             jumping = true;
         }
