@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class BulletController : MonoBehaviour
 {
     Rigidbody2D rb;
+    public Vector2 moveDirection = Vector2.right;
 
     private void Start()
     {
@@ -15,8 +17,10 @@ public class BulletController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(Vector3.right * Time.deltaTime * 5);
+        transform.Translate(moveDirection * Time.deltaTime * 5);
+        
     }
+
 
     void OnCollisionEnter2D(Collision2D other)
     {
