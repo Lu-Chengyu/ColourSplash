@@ -12412,6 +12412,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc88f3abd4f2e5142bda79fc2b4f9379, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveDirection: {x: 1, y: 0}
 --- !u!212 &1379068851
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -17534,7 +17535,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletObject: {fileID: 1379068847}
-  bullectSpeed: 5
+  moveDirection: {x: 1, y: 0}
   moveSpeed: 5
   maxJumpHeight: 5
   maxJumpTime: 1
