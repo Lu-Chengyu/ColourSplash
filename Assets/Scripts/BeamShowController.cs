@@ -11,7 +11,7 @@ public class BeamShowController : MonoBehaviour
     private bool show;
     void Start()
     {
-        beamLight = GameObject.Find("Beam");
+        beamLight = transform.Find("Beam").gameObject;
         show = true;
     }
 
