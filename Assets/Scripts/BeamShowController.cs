@@ -6,8 +6,8 @@ public class BeamShowController : MonoBehaviour
 {
     // Start is called before the first frame update
     private GameObject beamLight;
-    public int showTime;
-    public int hideTime;
+    public float showTime;
+    public float hideTime;
     private bool show;
     void Start()
     {
@@ -34,27 +34,27 @@ public class BeamShowController : MonoBehaviour
         
     }
 
-    IEnumerator showBeamRoutine(int seconds)
+    IEnumerator showBeamRoutine(float seconds)
     {
         beamLight.SetActive(true);
-        int i = 0;
+        float i = 0;
         while (i < seconds)
         {
-            i += 1;
-            yield return new WaitForSeconds(1.0f);
+            i += 0.01f;
+            yield return new WaitForSeconds(0.01f);
         }
 
         show = false;
     }
 
-    IEnumerator hideBeamRoutine(int seconds)
+    IEnumerator hideBeamRoutine(float seconds)
     {
         beamLight.SetActive(false);
-        int i = 0;
+        float i = 0;
         while (i < seconds)
         {
-            i += 1;
-            yield return new WaitForSeconds(1.0f);
+            i += 0.01f;
+            yield return new WaitForSeconds(0.01f);
         }
 
         show = true;
