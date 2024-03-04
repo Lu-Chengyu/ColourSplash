@@ -138,7 +138,7 @@ public class PlayerMovement : MonoBehaviour
         }
         if (playerColorChange.GetColorName() == "Red" && Input.GetKeyDown(KeyCode.U))
         {
-            float jumpBuff = 2.0f;
+            float jumpBuff = 1.5f;
             velocity.y = jumpForce * jumpBuff;
             jumping = true;
         }
