@@ -26,7 +26,7 @@ public class PlayerMovement : MonoBehaviour
     public bool falling => velocity.y < 0f && !grounded;
 
     private bool canMove = true; // Flag to control movement constraint
-    private bool isSkillCold = false;
+    private bool isSkillCoolDown = false;
 
     private void Awake()
     {
@@ -105,10 +105,10 @@ public class PlayerMovement : MonoBehaviour
             moveDirection = Vector2.left;
         }
         float speedBuff = 1.0f;
-        if (playerColorChange.GetColorName() == "Green" && Input.GetKeyDown(KeyCode.U) && !isSkillCold)
+        if (playerColorChange.GetColorName() == "Green" && Input.GetKeyDown(KeyCode.U) && !isSkillCoolDown)
         {
             speedBuff = 6.0f;
-            isSkillCold = true;
+            isSkillCoolDown = true;
             StartCoroutine(SkillCooldownRoutine());
         }
         // velocity.x = Mathf.MoveTowards(velocity.x * speedBuff, inputAxis * moveSpeed, moveSpeed * Time.deltaTime);
@@ -146,12 +146,12 @@ public class PlayerMovement : MonoBehaviour
     private IEnumerator SkillCooldownRoutine()
     {
         float startTime = Time.time;
-        while (isSkillCold && Time.time - startTime < 2f)
+        while (isSkillCoolDown && Time.time - startTime < 2f)
         {
             yield return null; // Wait for next frame
         }
 
-        isSkillCold = false; // Skill is ready after cooldown
+        isSkillCoolDown = false; // Skill is ready after cooldown
     }
 
     private void ShootBullet()
