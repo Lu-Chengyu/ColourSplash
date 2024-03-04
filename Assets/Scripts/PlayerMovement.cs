@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -25,6 +26,7 @@ public class PlayerMovement : MonoBehaviour
     public bool falling => velocity.y < 0f && !grounded;
 
     private bool canMove = true; // Flag to control movement constraint
+    private bool isSkillCold = false;
 
     private void Awake()
     {
@@ -103,9 +105,11 @@ public class PlayerMovement : MonoBehaviour
             moveDirection = Vector2.left;
         }
         float speedBuff = 1.0f;
-        if (playerColorChange.GetColorName() == "Green" && Input.GetKeyDown(KeyCode.U))
+        if (playerColorChange.GetColorName() == "Green" && Input.GetKeyDown(KeyCode.U) && !isSkillCold)
         {
             speedBuff = 6.0f;
+            isSkillCold = true;
+            StartCoroutine(SkillCooldownRoutine());
         }
         // velocity.x = Mathf.MoveTowards(velocity.x * speedBuff, inputAxis * moveSpeed, moveSpeed * Time.deltaTime);
         velocity.x = Mathf.MoveTowards(velocity.x * speedBuff, inputAxis * moveSpeed * speedBuff, 1f);
@@ -129,7 +133,6 @@ public class PlayerMovement : MonoBehaviour
         // perform jump
         if (Input.GetButtonDown("Jump"))
         {
-            
             velocity.y = jumpForce;
             jumping = true;
         }
@@ -139,6 +142,16 @@ public class PlayerMovement : MonoBehaviour
             velocity.y = jumpForce * jumpBuff;
             jumping = true;
         }
+    }
+    private IEnumerator SkillCooldownRoutine()
+    {
+        float startTime = Time.time;
+        while (isSkillCold && Time.time - startTime < 2f)
+        {
+            yield return null; // Wait for next frame
+        }
+
+        isSkillCold = false; // Skill is ready after cooldown
     }
 
     private void ShootBullet()
