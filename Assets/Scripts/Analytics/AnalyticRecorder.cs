@@ -41,7 +41,7 @@ public class AnalyticRecorder : MonoBehaviour
         string json = JsonUtility.ToJson(data);
         Debug.Log(json);
         RestClient.Post("https://csci526-62116-default-rtdb.firebaseio.com/.json", json).Then(response => {
-            EditorUtility.DisplayDialog("Status", response.StatusCode.ToString(), "Ok");
+            return;
         }); ;
 
 
