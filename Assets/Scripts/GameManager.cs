@@ -1,6 +1,8 @@
 using System;
+using System.Drawing;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 public class GameManager : MonoBehaviour
 {
@@ -11,6 +13,7 @@ public class GameManager : MonoBehaviour
     // public Text blueCounterText;
     public int currentLevel;
     public int maxLevel;
+    public Transform player;
 
     // private int redCount;
     // private int greenCount;
@@ -93,6 +96,7 @@ public class GameManager : MonoBehaviour
     public void DestroyGameInstance()
     {
         // Application.Quit();
+        FindObjectOfType<AnalyticRecorder>().recordDeath(player.position);
         FindObjectOfType<EndGame>().End(false);
     }
 

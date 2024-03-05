@@ -68,7 +68,7 @@ public class PlayerMovement : MonoBehaviour
             HorizontalMovement();
             ShootBullet();
             grounded = rigidbody.Raycast(Vector2.down);
-            Debug.Log(grounded);
+            //Debug.Log(grounded);
             if (grounded)
             {
                 GroundedMovement();
