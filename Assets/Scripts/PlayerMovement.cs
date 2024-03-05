@@ -68,7 +68,7 @@ public class PlayerMovement : MonoBehaviour
             HorizontalMovement();
             ShootBullet();
             grounded = rigidbody.Raycast(Vector2.down);
-
+            //Debug.Log(grounded);
             if (grounded)
             {
                 GroundedMovement();
@@ -133,12 +133,13 @@ public class PlayerMovement : MonoBehaviour
         // perform jump
         if (Input.GetButtonDown("Jump"))
         {
+            Debug.Log("Jumping!");
             velocity.y = jumpForce;
             jumping = true;
         }
-        if (playerColorChange.GetColorName() == "Red" && Input.GetKeyDown(KeyCode.U))
+        else if (playerColorChange.GetColorName() == "Red" && Input.GetKeyDown(KeyCode.U))
         {
-            float jumpBuff = 1.5f;
+            float jumpBuff = 1.65f;
             velocity.y = jumpForce * jumpBuff;
             jumping = true;
         }

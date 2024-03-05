@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 public class LevelUIController : MonoBehaviour
 {
     public GameObject instructionScreen;
+    public GameObject pauseScreen;
+    public Transform player;
     
     void Awake()
     {
@@ -36,6 +38,8 @@ public class LevelUIController : MonoBehaviour
     public void RestartCurrentScene()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        //player.position = new Vector3(-16, -3, 0);
+        //instructionScreen.SetActive(false);
         Time.timeScale = 1f;
     }
     
