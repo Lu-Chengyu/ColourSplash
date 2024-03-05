@@ -1,10 +1,10 @@
-using Unity.Play.Publisher.Editor;
 using UnityEngine;
 
 public class PlayerColorChange : MonoBehaviour
 {
     private SpriteRenderer spriteRenderer;
     private GameManager gameManager;
+    private Color currentColor;
 
     void Start()
     {
@@ -27,6 +27,10 @@ public class PlayerColorChange : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.L))
         {
             TryChangeColor(Color.blue);
+        }
+        else
+        {
+            return;
         }
     }
 
@@ -51,6 +55,7 @@ public class PlayerColorChange : MonoBehaviour
         // if (gameManager.IsColorAvailable(color) && color != spriteRenderer.color)
         if (color != spriteRenderer.color)
         {
+            FindObjectOfType<AnalyticRecorder>().recordColorChange(ConvertColorName(currentColor), ConvertColorName(color), transform.position);
             ChangeColor(color);
             // gameManager.UpdateCounter(GetColorName(), -1); // Decrease counter
         }
@@ -58,6 +63,7 @@ public class PlayerColorChange : MonoBehaviour
 
     void ChangeColor(Color newColor)
     {
+        currentColor = newColor;
         spriteRenderer.color = newColor;
     }
 
@@ -74,6 +80,18 @@ public class PlayerColorChange : MonoBehaviour
         else if (spriteRenderer.color == Color.green)
             return "Green";
         else if (spriteRenderer.color == Color.blue)
+            return "Blue";
+        else
+            return "";
+    }
+
+    public string ConvertColorName(Color color)
+    {
+        if (color == Color.red)
+            return "Red";
+        else if (color == Color.green)
+            return "Green";
+        else if (color == Color.blue)
             return "Blue";
         else
             return "";
