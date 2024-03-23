@@ -36,22 +36,6 @@ public class PlayerMovement : MonoBehaviour
         playerColorChange = GetComponent<PlayerColorChange>();
     }
 
-    private void OnEnable()
-    {
-        rigidbody.isKinematic = false;
-        collider.enabled = true;
-        velocity = Vector2.zero;
-        jumping = false;
-    }
-
-    private void OnDisable()
-    {
-        rigidbody.isKinematic = true;
-        collider.enabled = false;
-        velocity = Vector2.zero;
-        jumping = false;
-    }
-
     private void Update()
     {
         if (playerColorChange.GetColor() == Color.white)
@@ -95,7 +79,7 @@ public class PlayerMovement : MonoBehaviour
     private void HorizontalMovement()
     {
         // accelerate / decelerate
-        inputAxis = Input.GetAxis("Horizontal");
+        inputAxis = Input.GetAxisRaw("Horizontal");
         if (inputAxis > 0)
         {
             moveDirection = Vector2.right;
