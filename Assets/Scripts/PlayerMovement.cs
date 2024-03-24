@@ -21,7 +21,8 @@ public class PlayerMovement : MonoBehaviour
     public float jumpForce => (2f * maxJumpHeight) / (maxJumpTime / 1.5f);
     public float gravity => (-2f * maxJumpHeight) / Mathf.Pow(maxJumpTime / 2f, 2f);
 
-    public bool grounded { get; private set; }
+    public RaycastHit2D grounded { get; private set; }
+    public LayerMask groundLayer;
     public bool jumping { get; private set; }
     public bool falling => velocity.y < 0f && !grounded;
 
@@ -58,10 +59,11 @@ public class PlayerMovement : MonoBehaviour
         {
             HorizontalMovement();
             ShootBullet();
-            grounded = rigidbody.Raycast(Vector2.down);
-            //Debug.Log(grounded);
+            // grounded = rigidbody.Raycast(Vector2.down);
+            grounded = Physics2D.Raycast(transform.position, transform.TransformDirection(Vector2.down), 0.6f,groundLayer);
             if (grounded)
             {
+                Debug.Log(grounded.collider.name);
                 GroundedMovement();
             }
 
