@@ -28,6 +28,13 @@ public class PlayerMovement : MonoBehaviour
     private bool canMove = true; // Flag to control movement constraint
     private bool isSkillCoolDown = false;
 
+    public float dashSpeed = 30f; 
+    public float dashDuration = 0.2f; 
+    private bool isDashing = false; 
+    private float dashEndTime = 0f; 
+    private float dashCoolDown = 2f; 
+    private float lastDashTime = -10f;
+
     private void Awake()
     {
         camera = Camera.main;
@@ -78,7 +85,21 @@ public class PlayerMovement : MonoBehaviour
 
     private void HorizontalMovement()
     {
-        // accelerate / decelerate
+        if (!isDashing && playerColorChange.GetColorName() == "Green" && Input.GetKeyDown(KeyCode.U) && Time.time > lastDashTime + dashCoolDown)
+        {
+            StartDash();
+        }
+
+        if (isDashing)
+        {
+            // If a dash is in progress, the speed is set directly in the StartDash method
+            if (Time.time >= dashEndTime)
+            {
+                EndDash();
+            }
+            return; // If dashing, no other inputs are processed
+        }
+
         inputAxis = Input.GetAxisRaw("Horizontal");
         if (inputAxis > 0)
         {
@@ -88,25 +109,32 @@ public class PlayerMovement : MonoBehaviour
         {
             moveDirection = Vector2.left;
         }
-        float speedBuff = 1.0f;
-        if (playerColorChange.GetColorName() == "Green" && Input.GetKeyDown(KeyCode.U) && !isSkillCoolDown)
-        {
-            speedBuff = 6.0f;
-            isSkillCoolDown = true;
-            StartCoroutine(SkillCooldownRoutine());
-        }
-        // velocity.x = Mathf.MoveTowards(velocity.x * speedBuff, inputAxis * moveSpeed, moveSpeed * Time.deltaTime);
-        velocity.x = Mathf.MoveTowards(velocity.x * speedBuff, inputAxis * moveSpeed * speedBuff, 1f);
 
+        velocity.x = Mathf.MoveTowards(velocity.x, inputAxis * moveSpeed, 1f);
 
-        // check if running into a wall
-        if (rigidbody.Raycast(Vector2.right * velocity.x))
+        // Stop moving if the character is facing a wall
+        if (rigidbody.Raycast(Vector2.right * Mathf.Sign(velocity.x)))
         {
             velocity.x = 0f;
         }
-        
+
         Vector2 position = rigidbody.position;
         position += velocity * Time.fixedDeltaTime;
+    }
+
+    private void StartDash()
+    {
+        isDashing = true;
+        dashEndTime = Time.time + dashDuration;
+        lastDashTime = Time.time;
+        velocity.x = moveDirection.x * dashSpeed; 
+    }
+
+    private void EndDash()
+    {
+        isDashing = false;
+        // The sprint ends and the velocity logic will be recalculated in the
+        // HorizontalMovement of the next Update cycle
     }
 
     private void GroundedMovement()
@@ -128,16 +156,7 @@ public class PlayerMovement : MonoBehaviour
             jumping = true;
         }
     }
-    private IEnumerator SkillCooldownRoutine()
-    {
-        float startTime = Time.time;
-        while (isSkillCoolDown && Time.time - startTime < 2f)
-        {
-            yield return null; // Wait for next frame
-        }
 
-        isSkillCoolDown = false; // Skill is ready after cooldown
-    }
 
     private void ShootBullet()
     {
