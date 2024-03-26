@@ -27,7 +27,7 @@ public class PlayerMovement : MonoBehaviour
     public bool falling => velocity.y < 0f && !grounded;
 
     private bool canMove = true; // Flag to control movement constraint
-    private bool isSkillCoolDown = false;
+    // private bool isSkillCoolDown = false;
 
     public float dashSpeed = 20f; 
     public float dashDuration = 0.2f; 
@@ -106,10 +106,18 @@ public class PlayerMovement : MonoBehaviour
         inputAxis = Input.GetAxisRaw("Horizontal");
         if (inputAxis > 0)
         {
+            if (moveDirection == Vector2.left)
+            {
+                FlipPlayer();
+            }
             moveDirection = Vector2.right;
         }
         else if (inputAxis < 0)
         {
+            if (moveDirection == Vector2.right)
+            {
+                FlipPlayer();
+            }
             moveDirection = Vector2.left;
         }
 
@@ -140,6 +148,14 @@ public class PlayerMovement : MonoBehaviour
         // HorizontalMovement of the next Update cycle
     }
 
+    private void FlipPlayer()
+    {
+        // transform.Rotate(0, 0, 180);
+        Vector3 currentScale = transform.localScale;
+        currentScale.x = currentScale.x * -1f;
+        transform.localScale = currentScale;
+    }
+
     private void GroundedMovement()
     {
         // prevent gravity from infinitly building up
@@ -154,7 +170,7 @@ public class PlayerMovement : MonoBehaviour
         }
         if (playerColorChange.GetColorName() == "Red" && Input.GetKeyDown(KeyCode.U))
         {
-            float jumpBuff = 1.65f;
+            float jumpBuff = 1.7f;
             velocity.y = jumpForce * jumpBuff;
             jumping = true;
         }

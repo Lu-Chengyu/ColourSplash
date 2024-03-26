@@ -8,6 +8,8 @@ public class BulletController : MonoBehaviour
 {
     Rigidbody2D rb;
     public Vector2 moveDirection = Vector2.right;
+    private float bulletSpeed = 10f;
+    private float bulletDuration = 0.5f;
 
     private void Awake()
     {
@@ -18,7 +20,7 @@ public class BulletController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(moveDirection * Time.deltaTime * 5);
+        transform.Translate(moveDirection * Time.deltaTime * bulletSpeed);
     }
 
 
@@ -38,6 +40,6 @@ public class BulletController : MonoBehaviour
 
     public void DestroyBullet()
     {
-        Destroy(this.gameObject, 2f); // bullets disappear after 3 seconds
+        Destroy(this.gameObject, bulletDuration); // bullets disappear after 3 seconds
     }
 }
