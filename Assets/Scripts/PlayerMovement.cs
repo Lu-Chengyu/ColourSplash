@@ -63,7 +63,7 @@ public class PlayerMovement : MonoBehaviour
             grounded = Physics2D.Raycast(transform.position, transform.TransformDirection(Vector2.down), 0.6f,groundLayer);
             if (grounded)
             {
-                Debug.Log(grounded.collider.name);
+                // Debug.Log(grounded.collider.name);
                 GroundedMovement();
             }
 
@@ -90,6 +90,7 @@ public class PlayerMovement : MonoBehaviour
         if (!isDashing && playerColorChange.GetColorName() == "Green" && Input.GetKeyDown(KeyCode.U) && Time.time > lastDashTime + dashCoolDown)
         {
             StartDash();
+            FindObjectOfType<Cooldown>().StartCooldown();
         }
 
         if (isDashing)

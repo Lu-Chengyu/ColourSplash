@@ -4,7 +4,7 @@ public class PlayerColorChange : MonoBehaviour
 {
     private SpriteRenderer spriteRenderer;
     private GameManager gameManager;
-    private Color currentColor;
+    public Color currentColor;
 
     void Start()
     {
