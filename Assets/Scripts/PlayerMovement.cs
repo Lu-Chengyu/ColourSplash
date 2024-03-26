@@ -29,7 +29,7 @@ public class PlayerMovement : MonoBehaviour
     private bool canMove = true; // Flag to control movement constraint
     private bool isSkillCoolDown = false;
 
-    public float dashSpeed = 30f; 
+    public float dashSpeed = 20f; 
     public float dashDuration = 0.2f; 
     private bool isDashing = false; 
     private float dashEndTime = 0f; 
