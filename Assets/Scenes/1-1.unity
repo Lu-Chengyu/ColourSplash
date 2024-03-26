@@ -24736,7 +24736,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentLevel: 1
-  maxLevel: 3
+  maxLevel: 4
   player: {fileID: 732947539}
 --- !u!4 &1964257471
 Transform:
