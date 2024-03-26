@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -20,11 +21,20 @@ public class PlayerMovement : MonoBehaviour
     public float jumpForce => (2f * maxJumpHeight) / (maxJumpTime / 1.5f);
     public float gravity => (-2f * maxJumpHeight) / Mathf.Pow(maxJumpTime / 2f, 2f);
 
-    public bool grounded { get; private set; }
+    public RaycastHit2D grounded { get; private set; }
+    public LayerMask groundLayer;
     public bool jumping { get; private set; }
     public bool falling => velocity.y < 0f && !grounded;
 
     private bool canMove = true; // Flag to control movement constraint
+    private bool isSkillCoolDown = false;
+
+    public float dashSpeed = 20f; 
+    public float dashDuration = 0.2f; 
+    private bool isDashing = false; 
+    private float dashEndTime = 0f; 
+    private float dashCoolDown = 2f; 
+    private float lastDashTime = -10f;
 
     private void Awake()
     {
@@ -32,22 +42,6 @@ public class PlayerMovement : MonoBehaviour
         rigidbody = GetComponent<Rigidbody2D>();
         collider = GetComponent<Collider2D>();
         playerColorChange = GetComponent<PlayerColorChange>();
-    }
-
-    private void OnEnable()
-    {
-        rigidbody.isKinematic = false;
-        collider.enabled = true;
-        velocity = Vector2.zero;
-        jumping = false;
-    }
-
-    private void OnDisable()
-    {
-        rigidbody.isKinematic = true;
-        collider.enabled = false;
-        velocity = Vector2.zero;
-        jumping = false;
     }
 
     private void Update()
@@ -65,10 +59,11 @@ public class PlayerMovement : MonoBehaviour
         {
             HorizontalMovement();
             ShootBullet();
-            grounded = rigidbody.Raycast(Vector2.down);
-
+            // grounded = rigidbody.Raycast(Vector2.down);
+            grounded = Physics2D.Raycast(transform.position, transform.TransformDirection(Vector2.down), 0.6f,groundLayer);
             if (grounded)
             {
+                // Debug.Log(grounded.collider.name);
                 GroundedMovement();
             }
 
@@ -92,8 +87,23 @@ public class PlayerMovement : MonoBehaviour
 
     private void HorizontalMovement()
     {
-        // accelerate / decelerate
-        inputAxis = Input.GetAxis("Horizontal");
+        if (!isDashing && playerColorChange.GetColorName() == "Green" && Input.GetKeyDown(KeyCode.U) && Time.time > lastDashTime + dashCoolDown)
+        {
+            StartDash();
+            FindObjectOfType<Cooldown>().StartCooldown();
+        }
+
+        if (isDashing)
+        {
+            // If a dash is in progress, the speed is set directly in the StartDash method
+            if (Time.time >= dashEndTime)
+            {
+                EndDash();
+            }
+            return; // If dashing, no other inputs are processed
+        }
+
+        inputAxis = Input.GetAxisRaw("Horizontal");
         if (inputAxis > 0)
         {
             moveDirection = Vector2.right;
@@ -102,23 +112,32 @@ public class PlayerMovement : MonoBehaviour
         {
             moveDirection = Vector2.left;
         }
-        float speedBuff = 1.0f;
-        if (playerColorChange.GetColorName() == "Green" && Input.GetKeyDown(KeyCode.U))
-        {
-            speedBuff = 6.0f;
-        }
-        // velocity.x = Mathf.MoveTowards(velocity.x * speedBuff, inputAxis * moveSpeed, moveSpeed * Time.deltaTime);
-        velocity.x = Mathf.MoveTowards(velocity.x * speedBuff, inputAxis * moveSpeed * speedBuff, 1f);
 
+        velocity.x = Mathf.MoveTowards(velocity.x, inputAxis * moveSpeed, 1f);
 
-        // check if running into a wall
-        if (rigidbody.Raycast(Vector2.right * velocity.x))
+        // Stop moving if the character is facing a wall
+        if (rigidbody.Raycast(Vector2.right * Mathf.Sign(velocity.x)))
         {
             velocity.x = 0f;
         }
-        
+
         Vector2 position = rigidbody.position;
         position += velocity * Time.fixedDeltaTime;
+    }
+
+    private void StartDash()
+    {
+        isDashing = true;
+        dashEndTime = Time.time + dashDuration;
+        lastDashTime = Time.time;
+        velocity.x = moveDirection.x * dashSpeed; 
+    }
+
+    private void EndDash()
+    {
+        isDashing = false;
+        // The sprint ends and the velocity logic will be recalculated in the
+        // HorizontalMovement of the next Update cycle
     }
 
     private void GroundedMovement()
@@ -129,17 +148,18 @@ public class PlayerMovement : MonoBehaviour
         // perform jump
         if (Input.GetButtonDown("Jump"))
         {
-            
+            Debug.Log("Jumping!");
             velocity.y = jumpForce;
             jumping = true;
         }
         if (playerColorChange.GetColorName() == "Red" && Input.GetKeyDown(KeyCode.U))
         {
-            float jumpBuff = 2.0f;
+            float jumpBuff = 1.65f;
             velocity.y = jumpForce * jumpBuff;
             jumping = true;
         }
     }
+
 
     private void ShootBullet()
     {

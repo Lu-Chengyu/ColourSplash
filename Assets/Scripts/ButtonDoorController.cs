@@ -8,7 +8,7 @@ public class ButtonDoorController : MonoBehaviour
     public SpriteRenderer buttonRenderer;
     public Color activeColor;
     public Color inactiveColor;
-    public GameObject door;
+    public GameObject[] doors;
 
 
     //private bool isWeightOnButton = false;
@@ -45,27 +45,33 @@ public class ButtonDoorController : MonoBehaviour
         if (isDoorOpen)
         {
             buttonRenderer.color = activeColor;
-            OpenDoor();
+            OpenDoors();
         }
         else
         {
             buttonRenderer.color = inactiveColor;
-            CloseDoor();
+            CloseDoors();
         }
     }
 
 
-    private void OpenDoor()
+    private void OpenDoors()
     {
         // Open the door (e.g., by rotating it or moving it up)
-        door.SetActive(false);
+        foreach (GameObject door in doors)
+        {
+            door.SetActive(false);
+        }
     }
 
 
-    private void CloseDoor()
+    private void CloseDoors()
     {
         // Close the door (e.g., by rotating it back or moving it down)
-        door.SetActive(true);
+         foreach (GameObject door in doors)
+        {
+            door.SetActive(true);
+        }
     }
 
 
