@@ -10492,6 +10492,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 145900821610685304, guid: 5a248a5ff320fb64799569b855ef0b67, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1314368599311474854, guid: 5a248a5ff320fb64799569b855ef0b67, type: 3}
       propertyPath: m_LocalPosition.x
       value: -15.89
@@ -10531,6 +10535,10 @@ PrefabInstance:
     - target: {fileID: 1314368599311474854, guid: 5a248a5ff320fb64799569b855ef0b67, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1738923631914996875, guid: 5a248a5ff320fb64799569b855ef0b67, type: 3}
+      propertyPath: dashSpeed
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 1738923631914996875, guid: 5a248a5ff320fb64799569b855ef0b67, type: 3}
       propertyPath: bulletObject
@@ -27575,10 +27583,10 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 519420032}
+  - {fileID: 732947538}
   - {fileID: 1278963375}
   - {fileID: 1964257471}
   - {fileID: 1715861738}
   - {fileID: 600653434}
   - {fileID: 1010816381}
   - {fileID: 1028828135957366061}
-  - {fileID: 732947538}
