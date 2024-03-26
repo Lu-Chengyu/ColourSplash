@@ -96,6 +96,7 @@ public class GameManager : MonoBehaviour
     public void DestroyGameInstance()
     {
         // Application.Quit();
+       
         FindObjectOfType<AnalyticRecorder>().recordDeath(player.position);
         FindObjectOfType<EndGame>().End(false);
     }

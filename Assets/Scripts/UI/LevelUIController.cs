@@ -37,6 +37,7 @@ public class LevelUIController : MonoBehaviour
     
     public void RestartCurrentScene()
     {
+        Debug.Log("Game restart");
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         //player.position = new Vector3(-16, -3, 0);
         //instructionScreen.SetActive(false);
