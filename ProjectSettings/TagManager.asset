@@ -8,6 +8,7 @@ TagManager:
   - RedPlatform
   - GreenPlatform
   - Platform
+  - box
   layers:
   - Default
   - TransparentFX
