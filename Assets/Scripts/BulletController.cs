@@ -38,6 +38,15 @@ public class BulletController : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        ButtonDoorController buttonDoorController = other.gameObject.GetComponent<ButtonDoorController>();
+        if (buttonDoorController != null)
+        {
+            Destroy(this.gameObject);
+        }
+    }
+
     public void DestroyBullet()
     {
         Destroy(this.gameObject, bulletDuration); // bullets disappear after 3 seconds

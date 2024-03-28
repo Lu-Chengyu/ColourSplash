@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8431897416863339877}
   - component: {fileID: 6828497170263760443}
   - component: {fileID: 213093022837667007}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -171,7 +171,7 @@ GameObject:
   - component: {fileID: 3460781038035224180}
   - component: {fileID: 5365868732071563311}
   - component: {fileID: 3449222891597047448}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -330,9 +330,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buttonRenderer: {fileID: 6703287683447285608}
-  activeColor: {r: 1, g: 1, b: 1, a: 1}
-  inactiveColor: {r: 0, g: 0, b: 0, a: 1}
-  doors: []
+  activeColor: {r: 0, g: 0, b: 0, a: 1}
+  inactiveColor: {r: 1, g: 1, b: 1, a: 1}
+  doors:
+  - {fileID: 389265850961746577}
 --- !u!1 &4870097986560427020
 GameObject:
   m_ObjectHideFlags: 0
@@ -342,7 +343,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 339680900471080329}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: ButtonController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
