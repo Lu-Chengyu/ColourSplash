@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1078956633064962110}
   - component: {fileID: 3213846820298002176}
   - component: {fileID: 78009365427494798}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: VerticalBlue
   m_TagString: Untagged
   m_Icon: {fileID: 0}

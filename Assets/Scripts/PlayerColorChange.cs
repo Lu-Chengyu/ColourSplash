@@ -10,7 +10,8 @@ public class PlayerColorChange : MonoBehaviour
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         gameManager = GameManager.Instance;
-        randomInitColor();
+        // randomInitColor();
+        TryChangeColor(Color.red);
     }
 
     void Update()
