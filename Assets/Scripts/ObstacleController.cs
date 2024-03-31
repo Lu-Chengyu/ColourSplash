@@ -16,18 +16,16 @@ public class ObstacleController : MonoBehaviour
 
     void Update()
     {
-        if (gameObject.tag == "box")
+        if (playerColorChange.GetColor() == obstacleColor)
         {
-            if (playerColorChange.GetColor() == obstacleColor)
-            {
-                // Matched colors, set collider size to the minimum
-                boxCollider.size = new Vector2(0.0001f, 0.0001f);
-            }
-            else
-            {
-                // Colors don't match, set collider size to default
-                boxCollider.size = new Vector2(1f, 1f); // Adjust this size according to your needs
-            }
+            // Matched colors, set collider size to the minimum
+            boxCollider.size = new Vector2(0.0001f, 0.0001f);
         }
+        else
+        {
+            // Colors don't match, set collider size to default
+            boxCollider.size = new Vector2(1f, 1f); // Adjust this size according to your needs
+        }
+        
     }
 }
