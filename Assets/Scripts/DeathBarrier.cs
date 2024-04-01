@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class DeathBarrier : MonoBehaviour
@@ -17,6 +18,8 @@ public class DeathBarrier : MonoBehaviour
     {
         if (playerInside && playerColorChange != null && playerColorChange.GetColor() != pitColor)
         {
+            String color = playerColorChange.GetColorName();
+            FindObjectOfType<AnalyticsRecorder>().colorUsage.SwitchColor(color);
             playerColorChange.gameObject.SetActive(false); // Turn off the player
             gameManager.DestroyGameInstance(); // Destroy the game instance
         }

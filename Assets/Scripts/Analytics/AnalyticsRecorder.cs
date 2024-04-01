@@ -10,13 +10,15 @@ public class AnalyticsRecorder : MonoBehaviour
     public DeathRecord deathRecord;
     public colorUsage colorUsage;
     public abilityUsageCollection abilityUsage;
+    private float startTime;
 
 
     private void Start()
     {
+        Debug.Log("AnalyticsRecorder started");
         colorChangeRecords = new List<ColorChangeRecord>();
-        float currentTime = Time.time;
-        colorUsage = new colorUsage(currentTime);
+        startTime = Time.time;
+        colorUsage = new colorUsage(startTime);
         abilityUsage = new abilityUsageCollection();
     }
 
@@ -30,7 +32,7 @@ public class AnalyticsRecorder : MonoBehaviour
 
     public void recordDeath(Vector3 position)
     {
-        deathRecord = new DeathRecord(position, Time.time);
+        deathRecord = new DeathRecord(position, Time.time - startTime);
         // string json = JsonUtility.ToJson(deathRecord);
         string json = JsonUtility.ToJson(colorUsage);
         Debug.Log(json);
