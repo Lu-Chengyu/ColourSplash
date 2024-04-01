@@ -15,7 +15,9 @@ public class FinishLine : MonoBehaviour
         Debug.Log("Finish line triggered!");
         if (other.CompareTag("Player"))
         {
-            FindObjectOfType<AnalyticRecorder>().postToDB();
+            // FindObjectOfType<AnalyticRecorder>().postToDB();
+            // FindAnyObjectByType<AnalyticRecorder>().recordAttempt(gameManager.currentLevel, PlayerPrefs.GetInt("attempts", 1));
+            
             Debug.Log("Player reached the finish line!");
             gameManager.LevelClear();
         }

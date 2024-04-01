@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,17 +12,13 @@ public class LevelMenuController : MonoBehaviour
     
     void Start()
     {
-        int currentLevel = PlayerPrefs.GetInt("maxLevel", 1);;
 
-        // Assuming levelButtons are ordered by level index
-        for (int i = 0; i < levelButtons.Length; i++)
-        {
-            // Unlock all levels up to and including the current level
-            levelButtons[i].interactable = i < currentLevel;
-        }
     }
     public void LoadLevel(string levelName)
     {
+        FindObjectOfType<IDManager>().deleteSessionID();
+        FindObjectOfType<IDManager>().createSessionID();
+        //PlayerPrefs.SetInt("currentLevel", Convert.ToInt32(levelName));
         SceneManager.LoadScene(levelName);
     }
     public void Back()
