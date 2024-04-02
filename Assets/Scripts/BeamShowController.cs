@@ -27,7 +27,8 @@ public class BeamShowController : MonoBehaviour
         {
             StartCoroutine(showBeamRoutine(showTime));
         }
-        else
+        else if (!show && hideTime > 0)
+        // when himeTime = 0, beam always exists
         {
             StartCoroutine(hideBeamRoutine(hideTime));
         }
