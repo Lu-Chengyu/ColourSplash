@@ -430,8 +430,8 @@ Transform:
   m_GameObject: {fileID: 256666471}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -6.4395, y: -4.8174, z: 9.988439}
-  m_LocalScale: {x: 7.1498685, y: 3.1826, z: 1}
+  m_LocalPosition: {x: -6.4395, y: -4.5634, z: 9.988439}
+  m_LocalScale: {x: 7.1498685, y: 3.690543, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1471438719}
@@ -1004,7 +1004,7 @@ MonoBehaviour:
   m_text: 'Switch to Green so you can cross long trap (move + U)!
 
     Use it once
-    takes 2 seconds to resume (see top rright for hints)'
+    takes 2 seconds to resume (see bottom left for hints)'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1211,7 +1211,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1314368599311474854, guid: 5a248a5ff320fb64799569b855ef0b67, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.49
+      value: -1.98
       objectReference: {fileID: 0}
     - target: {fileID: 1314368599311474854, guid: 5a248a5ff320fb64799569b855ef0b67, type: 3}
       propertyPath: m_LocalPosition.z

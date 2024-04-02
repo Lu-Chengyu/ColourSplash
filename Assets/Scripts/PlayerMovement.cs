@@ -30,7 +30,7 @@ public class PlayerMovement : MonoBehaviour
     // private bool isSkillCoolDown = false;
 
     public float dashSpeed = 20f; 
-    public float dashDuration = 0.2f; 
+    private float dashDuration = 0.05f; 
     private bool isDashing = false; 
     private float dashEndTime = 0f; 
     private float dashCoolDown = 2f; 
