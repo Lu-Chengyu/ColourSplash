@@ -89,6 +89,8 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!isDashing && playerColorChange.GetColorName() == "Green" && Input.GetKeyDown(KeyCode.U) && Time.time > lastDashTime + dashCoolDown)
         {
+            float currentTime = Time.time;
+            FindObjectOfType<AnalyticsRecorder>().abilityUsage.recordAbilityUsage(transform.position, "Green", currentTime);
             StartDash();
             FindObjectOfType<Cooldown>().StartCooldown();
         }
@@ -170,6 +172,8 @@ public class PlayerMovement : MonoBehaviour
         }
         if (playerColorChange.GetColorName() == "Red" && Input.GetKeyDown(KeyCode.U))
         {
+            float currentTime = Time.time;
+            FindObjectOfType<AnalyticsRecorder>().abilityUsage.recordAbilityUsage(transform.position, "Red", currentTime);
             float jumpBuff = 1.7f;
             velocity.y = jumpForce * jumpBuff;
             jumping = true;
@@ -181,6 +185,8 @@ public class PlayerMovement : MonoBehaviour
     {
         if (playerColorChange.GetColorName() == "Blue" && Input.GetKeyDown(KeyCode.U))
         {
+            float currentTime = Time.time;
+            FindObjectOfType<AnalyticsRecorder>().abilityUsage.recordAbilityUsage(transform.position, "Blue", currentTime);
             GameObject bullet = Instantiate(bulletObject, rigidbody.position, Quaternion.identity);
             BulletController bc = bullet.GetComponent<BulletController>();
             // bullet.AddComponent<BulletController>();

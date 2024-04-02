@@ -15,10 +15,12 @@ public class EndGame : MonoBehaviour
 
     public void End(bool isVictory)
     {
+        FindObjectOfType<AnalyticsRecorder>().postToDB();
         if (isVictory)
         {
             Time.timeScale = 0f;
             gameVictoryScreen.SetActive(true);
+            FindObjectOfType<IDManager>().deleteSessionID();
         }
         else
         {

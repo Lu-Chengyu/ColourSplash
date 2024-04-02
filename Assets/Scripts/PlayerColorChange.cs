@@ -11,6 +11,7 @@ public class PlayerColorChange : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         gameManager = GameManager.Instance;
         // randomInitColor();
+        FindObjectOfType<AnalyticsRecorder>().colorUsage.SwitchColor(ConvertColorName(Color.red));
         TryChangeColor(Color.red);
     }
 
@@ -56,7 +57,8 @@ public class PlayerColorChange : MonoBehaviour
         // if (gameManager.IsColorAvailable(color) && color != spriteRenderer.color)
         if (color != spriteRenderer.color)
         {
-            FindObjectOfType<AnalyticRecorder>().recordColorChange(ConvertColorName(currentColor), ConvertColorName(color), transform.position);
+            FindObjectOfType<AnalyticsRecorder>().recordColorChange(ConvertColorName(currentColor), ConvertColorName(color), transform.position);
+            FindObjectOfType<AnalyticsRecorder>().colorUsage.SwitchColor(ConvertColorName(currentColor));
             ChangeColor(color);
             // gameManager.UpdateCounter(GetColorName(), -1); // Decrease counter
         }
@@ -97,4 +99,8 @@ public class PlayerColorChange : MonoBehaviour
         else
             return "";
     }
+
 }
+
+
+
