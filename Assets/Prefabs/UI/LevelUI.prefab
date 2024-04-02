@@ -671,13 +671,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5937038455233009215}
     m_Modifications:
+    - target: {fileID: 1874242443560034723, guid: e307db04c9c9ab840b65d8481a7eb4f5, type: 3}
+      propertyPath: m_Text
+      value: Same Color can pass through Obstacles (Vertical/ Horizontal)
+      objectReference: {fileID: 0}
     - target: {fileID: 5958086958038865130, guid: e307db04c9c9ab840b65d8481a7eb4f5, type: 3}
       propertyPath: m_Name
       value: Instructions
       objectReference: {fileID: 0}
     - target: {fileID: 5958086958038865130, guid: e307db04c9c9ab840b65d8481a7eb4f5, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8256213230757331851, guid: e307db04c9c9ab840b65d8481a7eb4f5, type: 3}
       propertyPath: m_Pivot.x
