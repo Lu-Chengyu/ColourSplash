@@ -42160,8 +42160,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df8ad361af435794980a74b6632df1fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentLevel: 2
-  maxLevel: 4
+  currentLevel: 9
+  maxLevel: 99
   player: {fileID: 179806990}
 --- !u!4 &1964257471
 Transform:
