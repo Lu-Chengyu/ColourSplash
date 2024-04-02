@@ -24,8 +24,9 @@ public class LevelUIController : MonoBehaviour
     {
         FindObjectOfType<IDManager>().deleteSessionID();
         FindObjectOfType<IDManager>().createSessionID();
-        int currentLevel = PlayerPrefs.GetInt("currentLevel", 1);
-        SceneManager.LoadScene(currentLevel);
+        int currentLevel = PlayerPrefs.GetInt("currentLevel", 1) + 1;
+        Debug.Log("Next level: " + currentLevel);
+        SceneManager.LoadScene(currentLevel.ToString());
     }
     
     public void BackToMainMenu()
