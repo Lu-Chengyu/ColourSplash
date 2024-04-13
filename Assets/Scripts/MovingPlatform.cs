@@ -7,10 +7,18 @@ public class MovingPlatform : MonoBehaviour
 {
     public Transform PosA, PosB;
 
-    [SerializeField] private float moveSpeed;
+    public float moveSpeed;
+
+    Rigidbody2D rb2d;
 
     private Transform targetPos;
     // Start is called before the first frame update
+
+    void Awake()
+    {
+        rb2d = GetComponent<Rigidbody2D>();
+    }
+
     void Start()
     {
         targetPos = PosB;
@@ -25,11 +33,17 @@ public class MovingPlatform : MonoBehaviour
         transform.position = Vector2.MoveTowards(transform.position, targetPos.position, moveSpeed *Time.deltaTime);
     }
 
-    private void OnTriggerEnter2D(Collider2D collison )
+    private void OnTriggerEnter2D(Collider2D collision )
     {
-        if (collison.CompareTag("Player"))
+        if (collision.CompareTag("Player"))
         {
-            collison.transform.parent = this.transform;
+            PlayerMovement pm = collision.GetComponent<PlayerMovement>();
+            if (pm != null)
+            {
+                pm.isOnPlatform = true;
+                pm.platformRb = rb2d;
+            }
+            //collison.transform.parent = this.transform;
         }
     }
 
@@ -37,7 +51,12 @@ public class MovingPlatform : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            collision.transform.parent = null;
+            PlayerMovement pm = collision.GetComponent<PlayerMovement>();
+            if (pm != null)
+            {
+                pm.isOnPlatform = false;
+            }
+            //collision.transform.parent = null;
         }
     }
 }

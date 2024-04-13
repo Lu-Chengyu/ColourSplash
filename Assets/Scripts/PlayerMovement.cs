@@ -12,6 +12,9 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 velocity;
     private float inputAxis;
 
+    public bool isOnPlatform = false;
+    public Rigidbody2D platformRb = null;
+    
     public GameObject bulletObject;
     // public float bullectSpeed = 5f;
     public Vector2 moveDirection = Vector2.right;  // movement direction
@@ -123,7 +126,16 @@ public class PlayerMovement : MonoBehaviour
             moveDirection = Vector2.left;
         }
 
-        velocity.x = Mathf.MoveTowards(velocity.x, inputAxis * moveSpeed, 1f);
+        if (isOnPlatform)
+        {
+            Debug.Log(1111111);
+            Debug.Log(platformRb.velocity.x);
+            velocity.x = Mathf.MoveTowards(velocity.x, inputAxis * moveSpeed + MovingPlatform.moveSpeed, 1f);
+        }
+        else
+        {
+            velocity.x = Mathf.MoveTowards(velocity.x, inputAxis * moveSpeed, 1f);
+        }
 
         // Stop moving if the character is facing a wall
         if (rigidbody.Raycast(Vector2.right * Mathf.Sign(velocity.x)))

@@ -9,6 +9,7 @@ TagManager:
   - GreenPlatform
   - Platform
   - box
+  - MovingPlatform
   layers:
   - Default
   - TransparentFX
