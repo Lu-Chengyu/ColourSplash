@@ -65,6 +65,10 @@ public class PlayerMovement : MonoBehaviour
             {
                 // Debug.Log(grounded.collider.name);
                 GroundedMovement();
+                if (jumping && Input.GetKeyDown(KeyCode.Space))
+                {
+                    Debug.Log("MORE JUMP!");
+                }
             }
 
             ApplyGravity();
@@ -164,14 +168,14 @@ public class PlayerMovement : MonoBehaviour
         velocity.y = Mathf.Max(velocity.y, 0f);
         jumping = velocity.y > 0f;
         // perform jump
-        if (Input.GetButtonDown("Jump"))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            Debug.Log("Jumping!");
+            Debug.Log("Jumping! "+jumping);
             velocity.y = jumpForce;
             jumping = true;
-        }
-        if (playerColorChange.GetColorName() == "Red" && Input.GetKeyDown(KeyCode.U))
+        } else if (playerColorChange.GetColorName() == "Red" && Input.GetKeyDown(KeyCode.U))
         {
+            Debug.Log("U "+jumping);
             float currentTime = Time.time;
             FindObjectOfType<AnalyticsRecorder>().abilityUsage.recordAbilityUsage(transform.position, "Red", currentTime);
             float jumpBuff = 1.7f;
