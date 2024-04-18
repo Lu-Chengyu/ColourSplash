@@ -18,7 +18,8 @@ public class PlayerMovement : MonoBehaviour
     public float moveSpeed = 5f;
     public float maxJumpHeight = 5f;
     public float maxJumpTime = 1f;
-    public float jumpForce => (2f * maxJumpHeight) / (maxJumpTime / 1.5f);
+    //public float jumpForce => (2f * maxJumpHeight) / (maxJumpTime / 1.5f);
+    public float jumpForce => (2.3f * maxJumpHeight) / (maxJumpTime / 1.5f);
     public float gravity => (-2f * maxJumpHeight) / Mathf.Pow(maxJumpTime / 2f, 2f);
 
     public RaycastHit2D grounded { get; private set; }
@@ -218,7 +219,8 @@ public class PlayerMovement : MonoBehaviour
             Debug.Log("U "+jumping);
             float currentTime = Time.time;
             FindObjectOfType<AnalyticsRecorder>().abilityUsage.recordAbilityUsage(transform.position, "Red", currentTime);
-            float jumpBuff = 1.7f;
+            //float jumpBuff = 1.7f;
+            float jumpBuff = 1.4f;
             velocity.y = jumpForce * jumpBuff;
             jumping = true;
         }
@@ -246,8 +248,10 @@ public class PlayerMovement : MonoBehaviour
     {
         // check if falling
         bool falling = velocity.y < 0f || !Input.GetButton("Jump");
-        float multiplier = falling ? 2f : 1f;
-            
+        //float multiplier = falling ? 2f : 1f;
+        float multiplier = falling ? 1.8f : 1f;
+
+
         // apply gravity and terminal velocity
         velocity.y += gravity * multiplier * Time.deltaTime;
         velocity.y = Mathf.Max(velocity.y, gravity / 2f);
