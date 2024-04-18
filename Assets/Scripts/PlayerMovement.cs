@@ -26,15 +26,18 @@ public class PlayerMovement : MonoBehaviour
     public bool jumping { get; private set; }
     public bool falling => velocity.y < 0f && !grounded;
 
-    private bool canMove = true; // Flag to control movement constraint
+    //private bool canMove = true; // Flag to control movement constraint
     // private bool isSkillCoolDown = false;
 
-    public float dashSpeed = 15f; 
-    private float dashDuration = 0.2f; 
+    private float dashSpeed = 20f; 
+    private float dashDuration = 0.05f; 
     private bool isDashing = false; 
     private float dashEndTime = 0f; 
     private float dashCoolDown = 2f; 
     private float lastDashTime = -10f;
+
+    private bool shouldDash = false;
+
 
     private void Awake()
     {
@@ -46,37 +49,44 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        if (playerColorChange.GetColor() == Color.white)
-        {
-            canMove = false; // Stop movement
-        }
-        else
-        {
-            canMove = true; // Allow movement
-        }
+        //if (playerColorChange.GetColor() == Color.white)
+        //{
+        //    canMove = false; // Stop movement
+        //}
+        //else
+        //{
+        //    canMove = true; // Allow movement
+        //}
 
-        if (canMove)
+        //if (canMove)
+        //{
+        inputAxis = Input.GetAxisRaw("Horizontal");
+
+        if (playerColorChange.GetColorName() == "Green" && Input.GetKeyDown(KeyCode.U) && Time.time > lastDashTime + dashCoolDown)
         {
-            HorizontalMovement();
-            ShootBullet();
-            // grounded = rigidbody.Raycast(Vector2.down);
-            grounded = Physics2D.Raycast(transform.position, transform.TransformDirection(Vector2.down), 0.6f,groundLayer);
-            if (grounded)
+            shouldDash = true;
+        }
+        //HorizontalMovement();
+        ShootBullet();
+        // grounded = rigidbody.Raycast(Vector2.down);
+        grounded = Physics2D.Raycast(transform.position, transform.TransformDirection(Vector2.down), 0.6f,groundLayer);
+        if (grounded)
+        {
+            // Debug.Log(grounded.collider.name);
+            GroundedMovement();
+            if (jumping && Input.GetKeyDown(KeyCode.Space))
             {
-                // Debug.Log(grounded.collider.name);
-                GroundedMovement();
-                if (jumping && Input.GetKeyDown(KeyCode.Space))
-                {
-                    Debug.Log("MORE JUMP!");
-                }
+                Debug.Log("MORE JUMP!");
             }
-
-            ApplyGravity();
         }
+
+        ApplyGravity();
+        //}
     }
 
     private void FixedUpdate()
     {
+        HorizontalMovement();
         // move mario based on his velocity
         Vector2 position = rigidbody.position;
         position += velocity * Time.fixedDeltaTime;
@@ -91,13 +101,23 @@ public class PlayerMovement : MonoBehaviour
 
     private void HorizontalMovement()
     {
-        if (!isDashing && playerColorChange.GetColorName() == "Green" && Input.GetKeyDown(KeyCode.U) && Time.time > lastDashTime + dashCoolDown)
+        //if (!isDashing && playerColorChange.GetColorName() == "Green" && Input.GetKeyDown(KeyCode.U) && Time.time > lastDashTime + dashCoolDown)
+        //{
+        //    float currentTime = Time.time;
+        //    FindObjectOfType<AnalyticsRecorder>().abilityUsage.recordAbilityUsage(transform.position, "Green", currentTime);
+        //    StartDash();
+        //    FindObjectOfType<Cooldown>().StartCooldown();
+        //}
+
+        if (shouldDash)
         {
             float currentTime = Time.time;
             FindObjectOfType<AnalyticsRecorder>().abilityUsage.recordAbilityUsage(transform.position, "Green", currentTime);
             StartDash();
+            shouldDash = false; // Reset the dash flag after starting the dash
             FindObjectOfType<Cooldown>().StartCooldown();
         }
+
 
         if (isDashing)
         {
@@ -108,26 +128,46 @@ public class PlayerMovement : MonoBehaviour
             }
             return; // If dashing, no other inputs are processed
         }
-
-        inputAxis = Input.GetAxisRaw("Horizontal");
-        if (inputAxis > 0)
+        else
         {
-            if (moveDirection == Vector2.left)
+            if (inputAxis > 0)
             {
-                FlipPlayer();
+                if (moveDirection == Vector2.left)
+                {
+                    FlipPlayer();
+                }
+                moveDirection = Vector2.right;
             }
-            moveDirection = Vector2.right;
-        }
-        else if (inputAxis < 0)
-        {
-            if (moveDirection == Vector2.right)
+            else if (inputAxis < 0)
             {
-                FlipPlayer();
+                if (moveDirection == Vector2.right)
+                {
+                    FlipPlayer();
+                }
+                moveDirection = Vector2.left;
             }
-            moveDirection = Vector2.left;
+            velocity.x = Mathf.MoveTowards(velocity.x, inputAxis * moveSpeed, 1f);
         }
 
-        velocity.x = Mathf.MoveTowards(velocity.x, inputAxis * moveSpeed, 1f);
+        //inputAxis = Input.GetAxisRaw("Horizontal");
+        //if (inputAxis > 0)
+        //{
+        //    if (moveDirection == Vector2.left)
+        //    {
+        //        FlipPlayer();
+        //    }
+        //    moveDirection = Vector2.right;
+        //}
+        //else if (inputAxis < 0)
+        //{
+        //    if (moveDirection == Vector2.right)
+        //    {
+        //        FlipPlayer();
+        //    }
+        //    moveDirection = Vector2.left;
+        //}
+
+        //velocity.x = Mathf.MoveTowards(velocity.x, inputAxis * moveSpeed, 1f);
 
         // Stop moving if the character is facing a wall
         if (rigidbody.Raycast(Vector2.right * Mathf.Sign(velocity.x)))
