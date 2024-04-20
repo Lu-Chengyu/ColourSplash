@@ -5,8 +5,8 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     private new Camera camera;
-    private new Rigidbody2D rigidbody;
-    private new Collider2D collider;
+    public new Rigidbody2D rigidbody;
+    public new Collider2D collider;
     private PlayerColorChange playerColorChange; // Reference to the PlayerColorChange script
 
     private Vector2 velocity;
@@ -48,8 +48,14 @@ public class PlayerMovement : MonoBehaviour
         playerColorChange = GetComponent<PlayerColorChange>();
     }
 
+    private void Start()
+    {
+        Checkpoint();
+    }
+
     private void Update()
     {
+        
         //if (playerColorChange.GetColor() == Color.white)
         //{
         //    canMove = false; // Stop movement
@@ -266,6 +272,25 @@ public class PlayerMovement : MonoBehaviour
             {
                 velocity.y = 0f;
             }
+        }
+    }
+
+    private void Checkpoint()
+    {
+        if (PlayerPrefs.GetInt("fromCheckpoint") == 1)
+        {
+            float ckpt_x = PlayerPrefs.GetFloat("ckpt_x");
+            float ckpt_y = PlayerPrefs.GetFloat("ckpt_y");
+            Vector2 checkpointPosition = new Vector2(ckpt_x, ckpt_y);
+            transform.position = checkpointPosition;
+            PlayerPrefs.SetInt("fromCheckpoint", 0);
+            PlayerPrefs.Save();
+        }
+        else
+        {
+            PlayerPrefs.SetFloat("init_x", transform.position.x);
+            PlayerPrefs.SetFloat("init_y", transform.position.y);
+            PlayerPrefs.Save();
         }
     }
 

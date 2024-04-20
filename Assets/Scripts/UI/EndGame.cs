@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class EndGame : MonoBehaviour
 {
@@ -27,5 +28,14 @@ public class EndGame : MonoBehaviour
             Time.timeScale = 0f;
             gameOverScreen.SetActive(true);
         }
+    }
+
+    public void ResumeFromCheckpoint()
+    {
+        Debug.Log("Resume from checkpoint");
+        PlayerPrefs.SetInt("fromCheckpoint", 1);
+        PlayerPrefs.Save();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        Time.timeScale = 1f;
     }
 }
