@@ -47,9 +47,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df8ad361af435794980a74b6632df1fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentLevel: 1
+  currentLevel: 12
   maxLevel: 99
   player: {fileID: 0}
+  ckptText: {fileID: 3953932539482899609}
 --- !u!114 &6742736181507511739
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -182,6 +183,11 @@ GameObject:
 --- !u!1 &3517956108746745907 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1563961171853337122, guid: 4593c286c3532cb4f8910e956f56de97, type: 3}
+  m_PrefabInstance: {fileID: 2694845925730388497}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &3953932539482899609 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1421225041997926024, guid: 4593c286c3532cb4f8910e956f56de97, type: 3}
   m_PrefabInstance: {fileID: 2694845925730388497}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &4454883375516232156 stripped
