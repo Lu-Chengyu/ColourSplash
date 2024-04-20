@@ -52,4 +52,9 @@ public class LevelUIController : MonoBehaviour
     {
         FindObjectOfType<PauseGame>().Resume();
     }
+
+    public void ResumeFromCheckpoint()
+    {
+        FindObjectOfType<EndGame>().ResumeFromCheckpoint();
+    }
 }

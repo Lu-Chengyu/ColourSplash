@@ -5,8 +5,8 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     private new Camera camera;
-    private new Rigidbody2D rigidbody;
-    private new Collider2D collider;
+    public new Rigidbody2D rigidbody;
+    public new Collider2D collider;
     private PlayerColorChange playerColorChange; // Reference to the PlayerColorChange script
 
     private Vector2 velocity;
@@ -18,7 +18,8 @@ public class PlayerMovement : MonoBehaviour
     public float moveSpeed = 5f;
     public float maxJumpHeight = 5f;
     public float maxJumpTime = 1f;
-    public float jumpForce => (2f * maxJumpHeight) / (maxJumpTime / 1.5f);
+    //public float jumpForce => (2f * maxJumpHeight) / (maxJumpTime / 1.5f);
+    public float jumpForce => (2.3f * maxJumpHeight) / (maxJumpTime / 1.5f);
     public float gravity => (-2f * maxJumpHeight) / Mathf.Pow(maxJumpTime / 2f, 2f);
 
     public RaycastHit2D grounded { get; private set; }
@@ -26,15 +27,18 @@ public class PlayerMovement : MonoBehaviour
     public bool jumping { get; private set; }
     public bool falling => velocity.y < 0f && !grounded;
 
-    private bool canMove = true; // Flag to control movement constraint
+    //private bool canMove = true; // Flag to control movement constraint
     // private bool isSkillCoolDown = false;
 
-    public float dashSpeed = 15f; 
-    private float dashDuration = 0.2f; 
+    private float dashSpeed = 20f; 
+    private float dashDuration = 0.05f; 
     private bool isDashing = false; 
     private float dashEndTime = 0f; 
     private float dashCoolDown = 2f; 
     private float lastDashTime = -10f;
+
+    private bool shouldDash = false;
+
 
     private void Awake()
     {
@@ -44,35 +48,52 @@ public class PlayerMovement : MonoBehaviour
         playerColorChange = GetComponent<PlayerColorChange>();
     }
 
+    private void Start()
+    {
+        Checkpoint();
+    }
+
     private void Update()
     {
-        if (playerColorChange.GetColor() == Color.white)
-        {
-            canMove = false; // Stop movement
-        }
-        else
-        {
-            canMove = true; // Allow movement
-        }
+        
+        //if (playerColorChange.GetColor() == Color.white)
+        //{
+        //    canMove = false; // Stop movement
+        //}
+        //else
+        //{
+        //    canMove = true; // Allow movement
+        //}
 
-        if (canMove)
+        //if (canMove)
+        //{
+        inputAxis = Input.GetAxisRaw("Horizontal");
+
+        if (playerColorChange.GetColorName() == "Green" && Input.GetKeyDown(KeyCode.U) && Time.time > lastDashTime + dashCoolDown)
         {
-            HorizontalMovement();
-            ShootBullet();
-            // grounded = rigidbody.Raycast(Vector2.down);
-            grounded = Physics2D.Raycast(transform.position, transform.TransformDirection(Vector2.down), 0.6f,groundLayer);
-            if (grounded)
+            shouldDash = true;
+        }
+        //HorizontalMovement();
+        ShootBullet();
+        // grounded = rigidbody.Raycast(Vector2.down);
+        grounded = Physics2D.Raycast(transform.position, transform.TransformDirection(Vector2.down), 0.6f,groundLayer);
+        if (grounded)
+        {
+            // Debug.Log(grounded.collider.name);
+            GroundedMovement();
+            if (jumping && Input.GetKeyDown(KeyCode.Space))
             {
-                // Debug.Log(grounded.collider.name);
-                GroundedMovement();
+                Debug.Log("MORE JUMP!");
             }
-
-            ApplyGravity();
         }
+
+        ApplyGravity();
+        //}
     }
 
     private void FixedUpdate()
     {
+        HorizontalMovement();
         // move mario based on his velocity
         Vector2 position = rigidbody.position;
         position += velocity * Time.fixedDeltaTime;
@@ -87,13 +108,23 @@ public class PlayerMovement : MonoBehaviour
 
     private void HorizontalMovement()
     {
-        if (!isDashing && playerColorChange.GetColorName() == "Green" && Input.GetKeyDown(KeyCode.U) && Time.time > lastDashTime + dashCoolDown)
+        //if (!isDashing && playerColorChange.GetColorName() == "Green" && Input.GetKeyDown(KeyCode.U) && Time.time > lastDashTime + dashCoolDown)
+        //{
+        //    float currentTime = Time.time;
+        //    FindObjectOfType<AnalyticsRecorder>().abilityUsage.recordAbilityUsage(transform.position, "Green", currentTime);
+        //    StartDash();
+        //    FindObjectOfType<Cooldown>().StartCooldown();
+        //}
+
+        if (shouldDash)
         {
             float currentTime = Time.time;
             FindObjectOfType<AnalyticsRecorder>().abilityUsage.recordAbilityUsage(transform.position, "Green", currentTime);
             StartDash();
+            shouldDash = false; // Reset the dash flag after starting the dash
             FindObjectOfType<Cooldown>().StartCooldown();
         }
+
 
         if (isDashing)
         {
@@ -104,26 +135,46 @@ public class PlayerMovement : MonoBehaviour
             }
             return; // If dashing, no other inputs are processed
         }
-
-        inputAxis = Input.GetAxisRaw("Horizontal");
-        if (inputAxis > 0)
+        else
         {
-            if (moveDirection == Vector2.left)
+            if (inputAxis > 0)
             {
-                FlipPlayer();
+                if (moveDirection == Vector2.left)
+                {
+                    FlipPlayer();
+                }
+                moveDirection = Vector2.right;
             }
-            moveDirection = Vector2.right;
-        }
-        else if (inputAxis < 0)
-        {
-            if (moveDirection == Vector2.right)
+            else if (inputAxis < 0)
             {
-                FlipPlayer();
+                if (moveDirection == Vector2.right)
+                {
+                    FlipPlayer();
+                }
+                moveDirection = Vector2.left;
             }
-            moveDirection = Vector2.left;
+            velocity.x = Mathf.MoveTowards(velocity.x, inputAxis * moveSpeed, 1f);
         }
 
-        velocity.x = Mathf.MoveTowards(velocity.x, inputAxis * moveSpeed, 1f);
+        //inputAxis = Input.GetAxisRaw("Horizontal");
+        //if (inputAxis > 0)
+        //{
+        //    if (moveDirection == Vector2.left)
+        //    {
+        //        FlipPlayer();
+        //    }
+        //    moveDirection = Vector2.right;
+        //}
+        //else if (inputAxis < 0)
+        //{
+        //    if (moveDirection == Vector2.right)
+        //    {
+        //        FlipPlayer();
+        //    }
+        //    moveDirection = Vector2.left;
+        //}
+
+        //velocity.x = Mathf.MoveTowards(velocity.x, inputAxis * moveSpeed, 1f);
 
         // Stop moving if the character is facing a wall
         if (rigidbody.Raycast(Vector2.right * Mathf.Sign(velocity.x)))
@@ -164,17 +215,18 @@ public class PlayerMovement : MonoBehaviour
         velocity.y = Mathf.Max(velocity.y, 0f);
         jumping = velocity.y > 0f;
         // perform jump
-        if (Input.GetButtonDown("Jump"))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            Debug.Log("Jumping!");
+            Debug.Log("Jumping! "+jumping);
             velocity.y = jumpForce;
             jumping = true;
-        }
-        if (playerColorChange.GetColorName() == "Red" && Input.GetKeyDown(KeyCode.U))
+        } else if (playerColorChange.GetColorName() == "Red" && Input.GetKeyDown(KeyCode.U))
         {
+            Debug.Log("U "+jumping);
             float currentTime = Time.time;
             FindObjectOfType<AnalyticsRecorder>().abilityUsage.recordAbilityUsage(transform.position, "Red", currentTime);
-            float jumpBuff = 1.7f;
+            //float jumpBuff = 1.7f;
+            float jumpBuff = 1.4f;
             velocity.y = jumpForce * jumpBuff;
             jumping = true;
         }
@@ -202,8 +254,10 @@ public class PlayerMovement : MonoBehaviour
     {
         // check if falling
         bool falling = velocity.y < 0f || !Input.GetButton("Jump");
-        float multiplier = falling ? 2f : 1f;
-            
+        //float multiplier = falling ? 2f : 1f;
+        float multiplier = falling ? 1.8f : 1f;
+
+
         // apply gravity and terminal velocity
         velocity.y += gravity * multiplier * Time.deltaTime;
         velocity.y = Mathf.Max(velocity.y, gravity / 2f);
@@ -218,6 +272,25 @@ public class PlayerMovement : MonoBehaviour
             {
                 velocity.y = 0f;
             }
+        }
+    }
+
+    private void Checkpoint()
+    {
+        if (PlayerPrefs.GetInt("fromCheckpoint") == 1)
+        {
+            float ckpt_x = PlayerPrefs.GetFloat("ckpt_x");
+            float ckpt_y = PlayerPrefs.GetFloat("ckpt_y");
+            Vector2 checkpointPosition = new Vector2(ckpt_x, ckpt_y);
+            transform.position = checkpointPosition;
+            PlayerPrefs.SetInt("fromCheckpoint", 0);
+            PlayerPrefs.Save();
+        }
+        else
+        {
+            PlayerPrefs.SetFloat("init_x", transform.position.x);
+            PlayerPrefs.SetFloat("init_y", transform.position.y);
+            PlayerPrefs.Save();
         }
     }
 

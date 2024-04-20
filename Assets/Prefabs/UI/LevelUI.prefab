@@ -672,7 +672,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -2714988905996176265, guid: af1bf2fcc4d2c25449dba6c80ff2184a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 99d044e6ba2ad554b9f974bb0cfadad1, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1821,6 +1821,18 @@ PrefabInstance:
     - target: {fileID: 5685929826590073124, guid: 32dea5605c8994f4f94f3b53e782f27e, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6560354698390931108, guid: 32dea5605c8994f4f94f3b53e782f27e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 6684881326691336260}
+    - target: {fileID: 6560354698390931108, guid: 32dea5605c8994f4f94f3b53e782f27e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ResumeFromCheckpoint
+      objectReference: {fileID: 0}
+    - target: {fileID: 6560354698390931108, guid: 32dea5605c8994f4f94f3b53e782f27e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: LevelUIController, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 7983591632902801986, guid: 32dea5605c8994f4f94f3b53e782f27e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
