@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     public int currentLevel;
     public int maxLevel;
     public Transform player;
+    public GameObject ckptText;
 
     // private int redCount;
     // private int greenCount;
