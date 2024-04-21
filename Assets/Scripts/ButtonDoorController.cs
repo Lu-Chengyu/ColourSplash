@@ -14,22 +14,22 @@ public class ButtonDoorController : MonoBehaviour
     //private bool isWeightOnButton = false;
     //private int playerCount = 0;
 
-    private bool isDoorOpen = false;
+    public bool isDoorOpen = false;
 
 
-    //private void Update()
-    //{
-    //    if (isWeightOnButton)
-    //    {
-    //        buttonRenderer.color = activeColor;
-    //        OpenDoor();
-    //    }
-    //    else
-    //    {
-    //        buttonRenderer.color = inactiveColor;
-    //        CloseDoor();
-    //    }
-    //}
+    private void Update()
+    {
+        if (isDoorOpen)
+        {
+            buttonRenderer.color = activeColor;
+            OpenDoors();
+        }
+        else
+        {
+            buttonRenderer.color = inactiveColor;
+            CloseDoors();
+        }
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
