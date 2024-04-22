@@ -7,6 +7,7 @@ public class EndGame : MonoBehaviour
 {
     public GameObject gameOverScreen;
     public GameObject gameVictoryScreen;
+    public GameObject gameEndScreen;
 
     void Awake()
     {
@@ -19,9 +20,19 @@ public class EndGame : MonoBehaviour
         FindObjectOfType<AnalyticsRecorder>().postToDB();
         if (isVictory)
         {
-            Time.timeScale = 0f;
-            gameVictoryScreen.SetActive(true);
-            FindObjectOfType<IDManager>().deleteSessionID();
+            if(FindObjectOfType<GameManager>().currentLevel == 12)
+            {
+                Time.timeScale = 0f;
+                gameEndScreen.SetActive(true);
+                FindObjectOfType<IDManager>().deleteSessionID();
+            }
+            else
+            {
+                Time.timeScale = 0f;
+                gameVictoryScreen.SetActive(true);
+                FindObjectOfType<IDManager>().deleteSessionID();
+            }
+            
         }
         else
         {

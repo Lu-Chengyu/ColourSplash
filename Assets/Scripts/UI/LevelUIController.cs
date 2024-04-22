@@ -8,10 +8,16 @@ public class LevelUIController : MonoBehaviour
 {
     public GameObject instructionScreen;
     public GameObject pauseScreen;
+    public GameObject visualGuidance;
+    public GameObject closeVisual;
     public Transform player;
     
     void Awake()
     {
+        if(FindObjectOfType<GameManager>().currentLevel == 1)
+        {
+            visualGuidance.SetActive(true);
+        }
         instructionScreen.SetActive(false);
     }
     
@@ -56,5 +62,10 @@ public class LevelUIController : MonoBehaviour
     public void ResumeFromCheckpoint()
     {
         FindObjectOfType<EndGame>().ResumeFromCheckpoint();
+    }
+
+    public void CloseVG()
+    {
+        visualGuidance.SetActive(false);
     }
 }

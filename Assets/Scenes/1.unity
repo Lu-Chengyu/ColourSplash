@@ -3368,6 +3368,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2240505933983867723, guid: 30cb8b77855c97f42bf3d321b7aa9108, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2896263203907112540, guid: 30cb8b77855c97f42bf3d321b7aa9108, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -3379,6 +3383,38 @@ PrefabInstance:
     - target: {fileID: 2896263203907112540, guid: 30cb8b77855c97f42bf3d321b7aa9108, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: LevelUIController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5309657982347811390, guid: 30cb8b77855c97f42bf3d321b7aa9108, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5309657982347811390, guid: 30cb8b77855c97f42bf3d321b7aa9108, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5309657982347811390, guid: 30cb8b77855c97f42bf3d321b7aa9108, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5309657982347811390, guid: 30cb8b77855c97f42bf3d321b7aa9108, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5309657982347811390, guid: 30cb8b77855c97f42bf3d321b7aa9108, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 175.20312
+      objectReference: {fileID: 0}
+    - target: {fileID: 5309657982347811390, guid: 30cb8b77855c97f42bf3d321b7aa9108, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 52.82721
+      objectReference: {fileID: 0}
+    - target: {fileID: 5309657982347811390, guid: 30cb8b77855c97f42bf3d321b7aa9108, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 102.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5309657982347811390, guid: 30cb8b77855c97f42bf3d321b7aa9108, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 31.534
       objectReference: {fileID: 0}
     - target: {fileID: 5824846338974911918, guid: 30cb8b77855c97f42bf3d321b7aa9108, type: 3}
       propertyPath: m_Name
