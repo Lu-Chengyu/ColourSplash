@@ -65,6 +65,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameOverScreen: {fileID: 4454883375516232156}
   gameVictoryScreen: {fileID: 3517956108746745907}
+  gameEndScreen: {fileID: 8750594609505463736}
 --- !u!114 &3729063531165162167
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -198,5 +199,10 @@ GameObject:
 --- !u!224 &8575589347585088558 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5937038455233009215, guid: 4593c286c3532cb4f8910e956f56de97, type: 3}
+  m_PrefabInstance: {fileID: 2694845925730388497}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8750594609505463736 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6635596070625011625, guid: 4593c286c3532cb4f8910e956f56de97, type: 3}
   m_PrefabInstance: {fileID: 2694845925730388497}
   m_PrefabAsset: {fileID: 0}

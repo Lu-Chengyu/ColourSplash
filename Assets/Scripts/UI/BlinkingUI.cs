@@ -11,10 +11,12 @@ public class BlinkingUI : MonoBehaviour
     void Start()
     {
         uiElement = GetComponent<Image>(); // Get the Image component
+        Debug.Log(uiElement);
     }
 
     public void startBlink()
     {
+        uiElement = GetComponent<Image>();
         StartCoroutine(Blink());
     }
 

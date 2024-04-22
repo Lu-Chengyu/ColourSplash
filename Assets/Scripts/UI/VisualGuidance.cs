@@ -31,6 +31,7 @@ public class VisualGuidance : MonoBehaviour
     {
         HideAllSteps();
         tutorialSteps[step].SetActive(true);
+        tutorialSteps[step].GetComponentInChildren<BlinkingUI>().startBlink();
     }
 
     public void PreviousStep()
