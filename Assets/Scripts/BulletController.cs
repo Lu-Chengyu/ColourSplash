@@ -9,7 +9,7 @@ public class BulletController : MonoBehaviour
     Rigidbody2D rb;
     public Vector2 moveDirection = Vector2.right;
     private float bulletSpeed = 10f;
-    private float bulletDuration = 0.5f;
+    private float bulletDuration = 1f;
 
     private void Awake()
     {
