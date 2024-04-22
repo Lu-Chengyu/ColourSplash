@@ -11,10 +11,11 @@ public class BlinkingUI : MonoBehaviour
     void Start()
     {
         uiElement = GetComponent<Image>(); // Get the Image component
-        if (uiElement != null)
-            StartCoroutine(Blink());
-        else
-            Debug.LogError("BlinkingUI: No Image component found!");
+    }
+
+    public void startBlink()
+    {
+        StartCoroutine(Blink());
     }
 
     private IEnumerator Blink()
