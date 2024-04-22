@@ -6,7 +6,9 @@ public class VisualGuidance : MonoBehaviour
 {
     public GameObject[] tutorialSteps;
     public GameObject closeButton;
-    private int currentStep = 0;
+    public GameObject nextButton;
+    public GameObject previousButton;
+    public int currentStep = 0;
     private bool completed = false;
 
     void Start()
@@ -31,6 +33,16 @@ public class VisualGuidance : MonoBehaviour
     {
         HideAllSteps();
         tutorialSteps[step].SetActive(true);
+        if (step == 0)
+        {
+            previousButton.SetActive(false);
+            nextButton.SetActive(true);
+        }
+        else if(step == tutorialSteps.Length - 1)
+        {
+            previousButton.SetActive(true);
+            nextButton.SetActive(false);
+        }
         tutorialSteps[step].GetComponentInChildren<BlinkingUI>().startBlink();
     }
 
