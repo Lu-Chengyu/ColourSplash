@@ -17,7 +17,8 @@ public class LevelUIController : MonoBehaviour
     {
         // PlayerPrefs.SetInt("firstTime", 0);
         bool firstTime = PlayerPrefs.GetInt("firstTime", 0) == 0;
-        if(FindObjectOfType<GameManager>().currentLevel == 1 || firstTime)
+        bool level1FirstTime = PlayerPrefs.GetInt("level1Firsttime", 0) == 0;
+        if((FindObjectOfType<GameManager>().currentLevel == 1 && level1FirstTime) || firstTime)
         {
             isVG = true;
             visualGuidance.SetActive(true);
