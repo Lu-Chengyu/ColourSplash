@@ -11,6 +11,7 @@ public class LevelUIController : MonoBehaviour
     public GameObject visualGuidance;
     public GameObject closeVisual;
     public Transform player;
+    public bool isVG = false;
     
     void Awake()
     {
@@ -18,6 +19,7 @@ public class LevelUIController : MonoBehaviour
         bool firstTime = PlayerPrefs.GetInt("firstTime", 0) == 0;
         if(FindObjectOfType<GameManager>().currentLevel == 1 || firstTime)
         {
+            isVG = true;
             visualGuidance.SetActive(true);
         }
         
@@ -70,6 +72,7 @@ public class LevelUIController : MonoBehaviour
     public void CloseVG()
     {
         PlayerPrefs.SetInt("firstTime", 1);
+        isVG = false;
         visualGuidance.SetActive(false);
     }
 }
