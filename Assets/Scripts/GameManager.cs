@@ -34,6 +34,11 @@ public class GameManager : MonoBehaviour
 
         PlayerPrefs.SetInt("currentLevel", currentLevel);
 
+        if(currentLevel == 1)
+        {
+            PlayerPrefs.SetInt("level1Firsttime", 0);
+        }
+
         if (PlayerPrefs.GetInt("fromCheckpoint") == 0)
         {
             // checkpointPosition = transform.position;
@@ -107,6 +112,7 @@ public class GameManager : MonoBehaviour
         // Application.Quit();
        
         FindObjectOfType<AnalyticsRecorder>().recordDeath(player.position);
+        PlayerPrefs.SetInt("level1Firsttime", 1);
         FindObjectOfType<EndGame>().End(false);
     }
 
