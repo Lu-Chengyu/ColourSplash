@@ -53,10 +53,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        if (PlayerPrefs.GetInt("fromCheckpoint") == 1)
-        {
-            Checkpoint();
-        }
         
         //if (playerColorChange.GetColor() == Color.white)
         //{
@@ -95,6 +91,10 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (PlayerPrefs.GetInt("fromCheckpoint") == 1)
+        {
+            Checkpoint();
+        }
         HorizontalMovement();
         // move mario based on his velocity
         Vector2 position = rigidbody.position;
