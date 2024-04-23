@@ -38,8 +38,6 @@ public class PlayerMovement : MonoBehaviour
     private float lastDashTime = -10f;
 
     private bool shouldDash = false;
-    private bool jumpRequested = false;
-    private bool highJump = false;
 
     public CameraControl cameraControl;
 
@@ -75,27 +73,19 @@ public class PlayerMovement : MonoBehaviour
         }
         //HorizontalMovement();
         ShootBullet();
-
         // grounded = rigidbody.Raycast(Vector2.down);
         grounded = Physics2D.Raycast(transform.position, transform.TransformDirection(Vector2.down), 0.6f,groundLayer);
-        if (grounded && Input.GetKeyDown(KeyCode.Space))
+        if (grounded)
         {
-            jumpRequested = true;
-        }else if (grounded && playerColorChange.GetColorName() == "Red" && Input.GetKeyDown(KeyCode.U))
-        {
-            highJump = true;
+            // Debug.Log(grounded.collider.name);
+            GroundedMovement();
+            if (jumping && Input.GetKeyDown(KeyCode.Space))
+            {
+                Debug.Log("MORE JUMP!");
+            }
         }
-        //if (grounded)
-        //{
-        //    // Debug.Log(grounded.collider.name);
-        //    GroundedMovement();
-        //    if (jumping && Input.GetKeyDown(KeyCode.Space))
-        //    {
-        //        Debug.Log("MORE JUMP!");
-        //    }
-        //}
 
-        //ApplyGravity();
+        ApplyGravity();
         //}
     }
 
@@ -106,7 +96,6 @@ public class PlayerMovement : MonoBehaviour
             Checkpoint();
         }
         HorizontalMovement();
-        JumpAndGravity();
         // move mario based on his velocity
         Vector2 position = rigidbody.position;
         position += velocity * Time.fixedDeltaTime;
@@ -117,38 +106,6 @@ public class PlayerMovement : MonoBehaviour
         position.x = Mathf.Clamp(position.x, leftEdge.x + 0.5f, rightEdge.x - 0.5f);
     
         rigidbody.MovePosition(position);
-    }
-
-    private void JumpAndGravity()
-    {
-        if (jumpRequested)
-        {
-            velocity.y = jumpForce; // Set the vertical velocity to the jump force
-            jumping = true;
-            jumpRequested = false;
-        }else if(highJump)
-        {
-            float currentTime = Time.time;
-            FindObjectOfType<AnalyticsRecorder>().abilityUsage.recordAbilityUsage(transform.position, "Red", currentTime);
-            //float jumpBuff = 1.7f;
-            float jumpBuff = 1.4f;
-            velocity.y = jumpForce * jumpBuff;
-            jumping = true;
-            highJump = false;
-        }
-
-        // Apply gravity
-        bool isFalling = velocity.y < 0f || !Input.GetButton("Jump");
-        float multiplier = isFalling ? 1.8f : 1f;
-        velocity.y += gravity * multiplier * Time.deltaTime;
-        velocity.y = Mathf.Max(velocity.y, gravity / 2f);
-
-        // If hits head, stop vertical movement
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.TransformDirection(Vector2.up), 0.6f, groundLayer);
-        if (hit.collider != null)
-        {
-            velocity.y = 0f;
-        }
     }
 
     private void HorizontalMovement()
@@ -254,28 +211,28 @@ public class PlayerMovement : MonoBehaviour
         transform.localScale = currentScale;
     }
 
-    //private void GroundedMovement()
-    //{
-    //    // prevent gravity from infinitly building up
-    //    velocity.y = Mathf.Max(velocity.y, 0f);
-    //    jumping = velocity.y > 0f;
-    //    // perform jump
-    //    if (Input.GetKeyDown(KeyCode.Space))
-    //    {
-    //        Debug.Log("Jumping! "+jumping);
-    //        velocity.y = jumpForce;
-    //        jumping = true;
-    //    } else if (playerColorChange.GetColorName() == "Red" && Input.GetKeyDown(KeyCode.U))
-    //    {
-    //        Debug.Log("U "+jumping);
-    //        float currentTime = Time.time;
-    //        FindObjectOfType<AnalyticsRecorder>().abilityUsage.recordAbilityUsage(transform.position, "Red", currentTime);
-    //        //float jumpBuff = 1.7f;
-    //        float jumpBuff = 1.4f;
-    //        velocity.y = jumpForce * jumpBuff;
-    //        jumping = true;
-    //    }
-    //}
+    private void GroundedMovement()
+    {
+        // prevent gravity from infinitly building up
+        velocity.y = Mathf.Max(velocity.y, 0f);
+        jumping = velocity.y > 0f;
+        // perform jump
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Debug.Log("Jumping! "+jumping);
+            velocity.y = jumpForce;
+            jumping = true;
+        } else if (playerColorChange.GetColorName() == "Red" && Input.GetKeyDown(KeyCode.U))
+        {
+            Debug.Log("U "+jumping);
+            float currentTime = Time.time;
+            FindObjectOfType<AnalyticsRecorder>().abilityUsage.recordAbilityUsage(transform.position, "Red", currentTime);
+            //float jumpBuff = 1.7f;
+            float jumpBuff = 1.4f;
+            velocity.y = jumpForce * jumpBuff;
+            jumping = true;
+        }
+    }
 
 
     private void ShootBullet()
@@ -295,18 +252,18 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    //private void ApplyGravity()
-    //{
-    //    // check if falling
-    //    bool falling = velocity.y < 0f || !Input.GetButton("Jump");
-    //    //float multiplier = falling ? 2f : 1f;
-    //    float multiplier = falling ? 1.8f : 1f;
+    private void ApplyGravity()
+    {
+        // check if falling
+        bool falling = velocity.y < 0f || !Input.GetButton("Jump");
+        //float multiplier = falling ? 2f : 1f;
+        float multiplier = falling ? 1.8f : 1f;
 
 
-    //    // apply gravity and terminal velocity
-    //    velocity.y += gravity * multiplier * Time.deltaTime;
-    //    velocity.y = Mathf.Max(velocity.y, gravity / 2f);
-    //}
+        // apply gravity and terminal velocity
+        velocity.y += gravity * multiplier * Time.deltaTime;
+        velocity.y = Mathf.Max(velocity.y, gravity / 2f);
+    }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
