@@ -17,7 +17,10 @@ public class BlinkingUI : MonoBehaviour
     public void startBlink()
     {
         uiElement = GetComponent<Image>();
-        StartCoroutine(Blink());
+        if(FindObjectOfType<LevelUIController>().isVG)
+        {
+            StartCoroutine(Blink());
+        }
     }
 
     private IEnumerator Blink()
