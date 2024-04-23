@@ -3716,11 +3716,47 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 6684881326691336260}
+    - target: {fileID: 8249825983136456695, guid: 32dea5605c8994f4f94f3b53e782f27e, type: 3}
+      propertyPath: m_text
+      value: Respawn
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6899593964131857849, guid: 32dea5605c8994f4f94f3b53e782f27e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4645412165765569176}
   m_SourcePrefab: {fileID: 100100000, guid: 32dea5605c8994f4f94f3b53e782f27e, type: 3}
+--- !u!1 &692670258020923216 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6899593964131857849, guid: 32dea5605c8994f4f94f3b53e782f27e, type: 3}
+  m_PrefabInstance: {fileID: 6223011279256322793}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4645412165765569176
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 692670258020923216}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59ce563c40b96164799f96bfaa7f2016, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  respawnButton: {fileID: 961408700738339917}
+--- !u!114 &961408700738339917 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6560354698390931108, guid: 32dea5605c8994f4f94f3b53e782f27e, type: 3}
+  m_PrefabInstance: {fileID: 6223011279256322793}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 692670258020923216}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &2117313407856858665 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5421954181959800000, guid: 32dea5605c8994f4f94f3b53e782f27e, type: 3}

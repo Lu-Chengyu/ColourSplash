@@ -8,11 +8,13 @@ public class EndGame : MonoBehaviour
     public GameObject gameOverScreen;
     public GameObject gameVictoryScreen;
     public GameObject gameEndScreen;
+    public PlayerColorChange playerColorChange;
 
     void Awake()
     {
         gameOverScreen.SetActive(false);
         gameVictoryScreen.SetActive(false);
+        playerColorChange = FindAnyObjectByType<PlayerColorChange>();
     }
 
     public void End(bool isVictory)
@@ -44,9 +46,11 @@ public class EndGame : MonoBehaviour
     public void ResumeFromCheckpoint()
     {
         Debug.Log("Resume from checkpoint");
+        playerColorChange.gameObject.SetActive(true);
         PlayerPrefs.SetInt("fromCheckpoint", 1);
         PlayerPrefs.Save();
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        gameOverScreen.SetActive(false);
+        // SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         Time.timeScale = 1f;
     }
 }

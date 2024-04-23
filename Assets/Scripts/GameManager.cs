@@ -23,7 +23,10 @@ public class GameManager : MonoBehaviour
     void Awake()
     {
         Instance = this;
-
+        PlayerPrefs.SetInt("fromCheckpoint", 0);
+        PlayerPrefs.SetString("lastColor", "Red");
+        PlayerPrefs.SetInt("reachCheckpoint", 0);
+        PlayerPrefs.Save();
     }
 
     void Start()

@@ -48,13 +48,13 @@ public class PlayerMovement : MonoBehaviour
         playerColorChange = GetComponent<PlayerColorChange>();
     }
 
-    private void Start()
-    {
-        Checkpoint();
-    }
 
     private void Update()
     {
+        if (PlayerPrefs.GetInt("fromCheckpoint") == 1)
+        {
+            Checkpoint();
+        }
         
         //if (playerColorChange.GetColor() == Color.white)
         //{
@@ -277,21 +277,24 @@ public class PlayerMovement : MonoBehaviour
 
     private void Checkpoint()
     {
-        if (PlayerPrefs.GetInt("fromCheckpoint") == 1)
+        float ckpt_x = PlayerPrefs.GetFloat("ckpt_x");
+        float ckpt_y = PlayerPrefs.GetFloat("ckpt_y");
+        string neoColor = PlayerPrefs.GetString("lastColor");
+        if (neoColor == "Red")
         {
-            float ckpt_x = PlayerPrefs.GetFloat("ckpt_x");
-            float ckpt_y = PlayerPrefs.GetFloat("ckpt_y");
-            Vector2 checkpointPosition = new Vector2(ckpt_x, ckpt_y);
-            transform.position = checkpointPosition;
-            PlayerPrefs.SetInt("fromCheckpoint", 0);
-            PlayerPrefs.Save();
+            playerColorChange.ChangeColor(Color.red);
         }
-        else
+        else if (neoColor == "Green")
         {
-            PlayerPrefs.SetFloat("init_x", transform.position.x);
-            PlayerPrefs.SetFloat("init_y", transform.position.y);
-            PlayerPrefs.Save();
+            playerColorChange.ChangeColor(Color.green);
         }
+        else if (neoColor == "Blue")
+        {
+            playerColorChange.ChangeColor(Color.blue);
+        }
+        // Vector2 checkpointPosition = new Vector2(ckpt_x, ckpt_y);
+        transform.position = new Vector2(ckpt_x, ckpt_y);
+        PlayerPrefs.SetInt("fromCheckpoint", 0);
+        PlayerPrefs.Save();
     }
-
 }

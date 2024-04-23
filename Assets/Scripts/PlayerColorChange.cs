@@ -21,19 +21,23 @@ public class PlayerColorChange : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.J))
         {
             TryChangeColor(Color.red);
+            PlayerPrefs.SetString("lastColor", "Red");
         }
         else if (Input.GetKeyDown(KeyCode.K))
         {
             TryChangeColor(Color.green);
+            PlayerPrefs.SetString("lastColor", "Green");
         }
         else if (Input.GetKeyDown(KeyCode.L))
         {
             TryChangeColor(Color.blue);
+            PlayerPrefs.SetString("lastColor", "Blue");
         }
         else
         {
             return;
         }
+        PlayerPrefs.Save();
     }
 
     void randomInitColor()
@@ -64,7 +68,7 @@ public class PlayerColorChange : MonoBehaviour
         }
     }
 
-    void ChangeColor(Color newColor)
+    public void ChangeColor(Color newColor)
     {
         currentColor = newColor;
         spriteRenderer.color = newColor;
