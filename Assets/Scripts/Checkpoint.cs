@@ -36,7 +36,7 @@ public class Checkpoint : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             Debug.Log("Reach Checkpoint");
-            gameManager.UpdateCheckpointPosition(collision.gameObject.transform.position);
+            gameManager.UpdateCheckpointPosition(transform.position);
             // gameManager.UpdateCheckpointPosition(collision.gameObject.transform.position);
             PlayerPrefs.SetInt("reachCheckpoint", 1);
             PlayerPrefs.Save();

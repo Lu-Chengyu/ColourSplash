@@ -3429,6 +3429,26 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2242116771230410172, guid: 30cb8b77855c97f42bf3d321b7aa9108, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2510066017793810855, guid: 30cb8b77855c97f42bf3d321b7aa9108, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 2510066017793810855, guid: 30cb8b77855c97f42bf3d321b7aa9108, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 86.6355
+      objectReference: {fileID: 0}
+    - target: {fileID: 2510066017793810855, guid: 30cb8b77855c97f42bf3d321b7aa9108, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 2.3008
+      objectReference: {fileID: 0}
+    - target: {fileID: 2729583120623119660, guid: 30cb8b77855c97f42bf3d321b7aa9108, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2896263203907112540, guid: 30cb8b77855c97f42bf3d321b7aa9108, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -3440,6 +3460,10 @@ PrefabInstance:
     - target: {fileID: 2896263203907112540, guid: 30cb8b77855c97f42bf3d321b7aa9108, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: LevelUIController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 3491650990783724570, guid: 30cb8b77855c97f42bf3d321b7aa9108, type: 3}
+      propertyPath: m_Color.a
+      value: 0.5294118
       objectReference: {fileID: 0}
     - target: {fileID: 5309657982347811390, guid: 30cb8b77855c97f42bf3d321b7aa9108, type: 3}
       propertyPath: m_AnchorMax.x
