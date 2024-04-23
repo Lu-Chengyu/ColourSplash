@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,6 +10,7 @@ public class Checkpoint : MonoBehaviour
     GameManager gameManager;
     Collider2D coll;
     public GameObject checkpointText;
+    public Vector3 playerInitPosition;
     // Start is called before the first frame update
     private void Awake()
     {
@@ -20,6 +22,13 @@ public class Checkpoint : MonoBehaviour
     {
         circleRenderer = this.transform.GetChild(0).GetComponent<SpriteRenderer>();
         checkpointText = gameManager.ckptText;
+        playerInitPosition = gameManager.player.position;
+    }
+
+    private void Update()
+    {
+        Debug.Log(gameManager.player.position);
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -27,7 +36,7 @@ public class Checkpoint : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             Debug.Log("Reach Checkpoint");
-            gameManager.UpdateCheckpointPosition(transform.position);
+            gameManager.UpdateCheckpointPosition(collision.gameObject.transform.position);
             // gameManager.UpdateCheckpointPosition(collision.gameObject.transform.position);
             PlayerPrefs.SetInt("reachCheckpoint", 1);
             PlayerPrefs.Save();

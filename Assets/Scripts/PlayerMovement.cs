@@ -39,6 +39,7 @@ public class PlayerMovement : MonoBehaviour
 
     private bool shouldDash = false;
 
+    public CameraControl cameraControl;
 
     private void Awake()
     {
@@ -46,6 +47,7 @@ public class PlayerMovement : MonoBehaviour
         rigidbody = GetComponent<Rigidbody2D>();
         collider = GetComponent<Collider2D>();
         playerColorChange = GetComponent<PlayerColorChange>();
+        cameraControl = FindObjectOfType<CameraControl>();
     }
 
 
@@ -293,6 +295,8 @@ public class PlayerMovement : MonoBehaviour
             playerColorChange.ChangeColor(Color.blue);
         }
         // Vector2 checkpointPosition = new Vector2(ckpt_x, ckpt_y);
+        Vector2 checkpointPosition = new Vector2(ckpt_x, ckpt_y);
+        cameraControl.moveCameraToPlayer(checkpointPosition);
         transform.position = new Vector2(ckpt_x, ckpt_y);
         PlayerPrefs.SetInt("fromCheckpoint", 0);
         PlayerPrefs.Save();
