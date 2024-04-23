@@ -23,4 +23,10 @@ public class CameraControl : MonoBehaviour
         Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed);
         transform.position = smoothedPosition;
     }
+
+    public void moveCameraToPlayer(Vector3 pos)
+    {
+        transform.position = pos + offset;
+        
+    }
 }
