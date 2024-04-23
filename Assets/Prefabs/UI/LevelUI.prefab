@@ -2040,6 +2040,7 @@ MonoBehaviour:
   visualGuidance: {fileID: 38115075473876797}
   closeVisual: {fileID: 1776259062847433936}
   player: {fileID: 0}
+  isVG: 0
 --- !u!114 &7578051809025890433
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2849,6 +2850,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5937038455233009215}
     m_Modifications:
+    - target: {fileID: 4195267871259340835, guid: 01f013a37e3f04bc4abdaca45df5428a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 6684881326691336260}
+    - target: {fileID: 4195267871259340835, guid: 01f013a37e3f04bc4abdaca45df5428a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: BackToMainMenu
+      objectReference: {fileID: 0}
     - target: {fileID: 5431051760658954217, guid: 01f013a37e3f04bc4abdaca45df5428a, type: 3}
       propertyPath: m_Name
       value: EndScreen
@@ -2856,6 +2865,14 @@ PrefabInstance:
     - target: {fileID: 5431051760658954217, guid: 01f013a37e3f04bc4abdaca45df5428a, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6843828279038803381, guid: 01f013a37e3f04bc4abdaca45df5428a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 6684881326691336260}
+    - target: {fileID: 6843828279038803381, guid: 01f013a37e3f04bc4abdaca45df5428a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OpenLevelSelect
       objectReference: {fileID: 0}
     - target: {fileID: 8714530448737388769, guid: 01f013a37e3f04bc4abdaca45df5428a, type: 3}
       propertyPath: m_Pivot.x
