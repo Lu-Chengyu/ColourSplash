@@ -26,8 +26,11 @@ public class Checkpoint : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            Debug.Log("Checkpoint");
+            Debug.Log("Reach Checkpoint");
             gameManager.UpdateCheckpointPosition(transform.position);
+            // gameManager.UpdateCheckpointPosition(collision.gameObject.transform.position);
+            PlayerPrefs.SetInt("reachCheckpoint", 1);
+            PlayerPrefs.Save();
             circleRenderer.color = Color.white;
             coll.enabled = false;
             showText();
