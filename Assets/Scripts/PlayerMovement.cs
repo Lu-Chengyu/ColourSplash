@@ -298,6 +298,8 @@ public class PlayerMovement : MonoBehaviour
         Vector2 checkpointPosition = new Vector2(ckpt_x, ckpt_y);
         cameraControl.moveCameraToPlayer(checkpointPosition);
         transform.position = new Vector2(ckpt_x, ckpt_y);
+        velocity.x = 0f;
+        velocity.y = 0f;
         PlayerPrefs.SetInt("fromCheckpoint", 0);
         PlayerPrefs.Save();
     }
