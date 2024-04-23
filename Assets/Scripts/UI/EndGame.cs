@@ -20,7 +20,7 @@ public class EndGame : MonoBehaviour
         FindObjectOfType<AnalyticsRecorder>().postToDB();
         if (isVictory)
         {
-            if(FindObjectOfType<GameManager>().currentLevel == 13)
+            if(FindObjectOfType<GameManager>().currentLevel == 12)
             {
                 Time.timeScale = 0f;
                 gameEndScreen.SetActive(true);

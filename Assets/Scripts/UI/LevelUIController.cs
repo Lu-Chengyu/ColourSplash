@@ -15,12 +15,12 @@ public class LevelUIController : MonoBehaviour
     void Awake()
     {
         // PlayerPrefs.SetInt("firstTime", 0);
-        // bool firstTime = PlayerPrefs.GetInt("firstTime", 0) == 0;
-        // if(FindObjectOfType<GameManager>().currentLevel == 1 && firstTime)
-        // {
-            
-        // }
-        visualGuidance.SetActive(true);
+        bool firstTime = PlayerPrefs.GetInt("firstTime", 0) == 0;
+        if(FindObjectOfType<GameManager>().currentLevel == 1 || firstTime)
+        {
+            visualGuidance.SetActive(true);
+        }
+        
         instructionScreen.SetActive(false);
     }
     
